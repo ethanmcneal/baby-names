@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
-
+import { ScrollView } from 'react-native-gesture-handler';
+import Names from '../assets/data.json'
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
 export default function Home() {
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={styles.separator}/>
-      <EditScreenInfo />
+      <Text> Baby Names</Text>
+      <Text>{JSON.stringify(Names)}</Text>
       <View style={styles.separator}  />
+      </ScrollView>
     </View>
   );
 }
