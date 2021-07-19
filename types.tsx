@@ -22,3 +22,9 @@ export type TabTwoParamList = {
   'SquareCard': undefined
   CenterView: undefined
 };
+
+export type Name = {
+  id: number,
+  boy: string,
+  girl: string
+}
