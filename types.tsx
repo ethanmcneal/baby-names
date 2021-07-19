@@ -28,3 +28,9 @@ export type Name = {
   boy: string,
   girl: string
 }
+
+export type NameState = {
+  names: Array<Name>,
+  likedNames: Array<Name>,
+  dislikedNames: Array<Name>,
+}
