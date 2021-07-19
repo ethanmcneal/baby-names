@@ -1,16 +1,19 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useSelector, useStore } from 'react-redux';
 import Names from '../assets/data.json'
 import { Text, View } from '../components/Themed';
+import { NameState } from '../types';
 
 export default function Home() {
+  const names = useSelector((state :any) => state.names.names)
   return (
     <View style={styles.container}>
       <ScrollView>
       <View style={styles.separator}/>
       <Text> Baby Names</Text>
-      <Text>{JSON.stringify(Names)}</Text>
+      <Text>{JSON.stringify(names)}</Text>
       <View style={styles.separator}  />
       </ScrollView>
     </View>
