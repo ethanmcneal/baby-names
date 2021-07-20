@@ -18,7 +18,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => setCounter((prev) => prev + 1)}
+					onPress={() => setGender(false)}
 				>
 					<Ionicons name={"male-outline"} size={40} color="blue" />
 				</TouchableOpacity>
@@ -28,7 +28,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => setCounter((prev) => prev + 1)}
+					onPress={() => setGender(true)}
 				>
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
