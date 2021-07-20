@@ -27,10 +27,7 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-      <SafeAreaProvider>
         <AppNavigator />
-        <StatusBar />
-      </SafeAreaProvider>
       </Provider>
     );
   }
