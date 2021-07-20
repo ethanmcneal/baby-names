@@ -20,7 +20,7 @@ export default function Home() {
     <View style={styles.container}>
       <View style={styles.separator}/>
       <Text> Baby Names</Text>
-      <NameCard names={boyNames}/>
+      <NameCard boyNames={boyNames} girlNames={girlNames}/>
       <View style={styles.separator}  />
     </View>
       </ScrollView>
