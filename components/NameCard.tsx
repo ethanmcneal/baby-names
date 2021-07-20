@@ -1,14 +1,41 @@
+
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Button, StyleSheet } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import {
+	Animated,
+	Button,
+	Dimensions,
+	PanResponder,
+	StyleSheet,
+} from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Name } from "../types";
 import { Text, View } from "./Themed";
 
+//transformation: rotateZ: (-a,a), translateY (y), translateX(-A,A)
+//sin(a) = a1/h
+//a1 = hsin(a)
+
+//cos(a) = a1/w,
+//a1
 const NameCard = (props: any) => {
 	const { boyNames, girlNames } = props;
 	const [counter, setCounter] = useState(0);
 	const [gender, setGender] = useState(false); // false === boy || true === girl
+
+	const { width, height } = Dimensions.get("window");
+    const initialPosition :any = new Animated.ValueXY()
+	const [position, setPosition] = useState(initialPosition);
+
+	const panResponder = PanResponder.create({
+		onStartShouldSetPanResponder: (evt, gesState) => true,
+		onPanResponderMove: (evt, gesState) => {
+			setPosition({ x: gesState.dx, y: gesState.dy });
+		},
+	    onPanResponderRelease: (evt, gesState) => {},
+		});
+
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.buttonContainer}>
@@ -33,12 +60,21 @@ const NameCard = (props: any) => {
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
 			</View>
-			<View style={styles.card}>
-				<Text style={styles.name}>
-					{gender ? girlNames[counter].name : boyNames[counter].name}
-				</Text>
-			</View>
-			<View style={styles.buttonContainer}>
+			{boyNames
+				.map((babyName: Name) => (
+					<Animated.View
+						{...panResponder.panHandlers}
+						key={babyName.id}
+						style={[
+							{ transform: position.getTranslateTransform() },
+							{ ...styles.boyCard },
+						]}
+					>
+						<Text style={styles.name}>{babyName.name}</Text>
+					</Animated.View>
+				))
+				.reverse()}
+			{/* <View style={styles.buttonContainer}>
 				<TouchableOpacity
 					onPress={() => setCounter((prev) => prev + 1)}
 				>
@@ -59,7 +95,7 @@ const NameCard = (props: any) => {
 					/>
 					<Text>Like</Text>
 				</TouchableOpacity>
-			</View>
+			</View> */}
 		</View>
 	);
 };
@@ -70,12 +106,21 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	card: {
+	girlCard: {
 		height: 300,
 		backgroundColor: "pink",
 		alignItems: "center",
 		justifyContent: "center",
 		width: "100%",
+		position: "absolute",
+	},
+	boyCard: {
+		height: 300,
+		backgroundColor: "#05BCEE",
+		alignItems: "center",
+		justifyContent: "center",
+		width: "100%",
+		position: "absolute",
 	},
 	name: {
 		fontSize: 22,
@@ -100,7 +145,7 @@ const styles = StyleSheet.create({
 		padding: 5,
 		borderWidth: 2,
 		borderColor: "#ccc",
-		backgroundColor: "#bbb",
+		backgroundColor: "#bfbfbf",
 		borderRadius: 8,
 		marginBottom: 10,
 	},

@@ -8,7 +8,6 @@ import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { NameState } from '../types';
-
 const colorScheme = Appearance.getColorScheme()
 
 export default function Home() {
@@ -20,6 +19,7 @@ export default function Home() {
     <View style={styles.container}>
       <View style={styles.separator}/>
       <Text> Baby Names</Text>
+      {/* <NameCard boyNames={boyNames} girlNames={girlNames}/> */}
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
       <View style={styles.separator}  />
     </View>
