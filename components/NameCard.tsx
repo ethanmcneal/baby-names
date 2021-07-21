@@ -23,7 +23,7 @@ const NameCard = (props: any) => {
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
-			position.setValue({ x: gesState.dx, y: gesState.dy, useNativeDriver: true });
+			position.setValue({ x: gesState.dx, y: gesState.dy});
 		},
 		onPanResponderRelease: (evt, gestureState) => {
 			if (gestureState.dx > 120) {
@@ -33,7 +33,7 @@ const NameCard = (props: any) => {
 				}).start(() => {
 					setCounter((prevState: number) => prevState + 1),
 						() => {
-							position.setValue({ x: 0, y: 0, useNativeDriver: true  });
+							position.setValue({ x: 0, y: 0});
 						};
 				});
 			} else if (gestureState.dx < -120) {
@@ -43,7 +43,7 @@ const NameCard = (props: any) => {
 				}).start(() => {
 					setCounter((prevState: number) => prevState + 1),
 						() => {
-							position.setValue({ x: 0, y: 0, useNativeDriver: true  });
+							position.setValue({ x: 0, y: 0});
 						};
 				});
 			} else {
@@ -52,7 +52,7 @@ const NameCard = (props: any) => {
                    useNativeDriver: false,
                    friction: 4
                    }).start(() => {
-                       position.setValue({x: 0, y: 0, useNativeDriver: true})
+                       position.setValue({x: 0, y: 0})
                    })
                 }
             },
@@ -85,8 +85,44 @@ const NameCard = (props: any) => {
 			},
 			...position.getTranslateTransform(),
 		],
-        useNativeDriver: true
-	};
+    	};
+
+        const renderNames = (names :Array<Name>) => {
+            return names.map((babyName :Name, i: number) => {
+                if (i < counter) {
+                    return null;
+                } else if (i === counter) {
+                    return (
+                        <Animated.View
+                            {...panResponder.panHandlers}
+                            key={babyName.id}
+                            style={[
+                                rotateAndTranslate,
+                                { ...styles.boyCard },
+                            ]}
+                        >
+                            <Text style={styles.name}>{babyName.name}</Text>
+                        </Animated.View>
+                    );
+                } else {
+                    return (
+                        <Animated.View
+                            key={babyName.id}
+                            style={[
+                                {
+                                    opacity: nextCardOpacity,
+                                    transform: [{ scale: nextCardScale }],
+                                },
+                                styles.boyCard,
+                            ]}
+                        >
+                            <Text style={styles.name}>{babyName.name}</Text>
+                        </Animated.View>
+                    );
+                }
+            })
+            .reverse()}
+        
 
 	return (
 		<View style={styles.container}>
@@ -112,42 +148,8 @@ const NameCard = (props: any) => {
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
 			</View>
-			{boyNames
-				.map((babyName: Name, i: number) => {
-					if (i < counter) {
-						return null;
-					} else if (i === counter) {
-						return (
-							<Animated.View
-								{...panResponder.panHandlers}
-								key={babyName.id}
-								style={[
-									rotateAndTranslate,
-									{ ...styles.boyCard },
-								]}
-							>
-								<Text style={styles.name}>{babyName.name}</Text>
-							</Animated.View>
-						);
-					} else {
-						return (
-							<Animated.View
-								key={babyName.id}
-								style={[
-									{
-										opacity: nextCardOpacity,
-										transform: [{ scale: nextCardScale }],
-									},
-									styles.boyCard,
-								]}
-							>
-								<Text style={styles.name}>{babyName.name}</Text>
-							</Animated.View>
-						);
-					}
-				})
-				.reverse()}
-			{/* <View style={styles.buttonContainer}>
+			{renderNames(gender ? girlNames : boyNames)}
+			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
 					onPress={() => setCounter((prev) => prev + 1)}
 				>
@@ -168,7 +170,7 @@ const NameCard = (props: any) => {
 					/>
 					<Text>Like</Text>
 				</TouchableOpacity>
-			</View> */}
+			</View>
 		</View>
 	);
 };
@@ -203,6 +205,12 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		width: "80%",
+	},
+    likeButtonContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		width: "80%", 
+        top: '120%'
 	},
 	genderButton: {
 		padding: 5,
