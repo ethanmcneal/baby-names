@@ -8,45 +8,82 @@ import {
 	StyleSheet,
 } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { Value } from "react-native-reanimated";
 import { Name } from "../types";
 import { Text, View } from "./Themed";
 
-//transformation: rotateZ: (-a,a), translateY (y), translateX(-A,A)
-//sin(a) = a1/h
-//a1 = hsin(a)
-
-
-//cos(a) = a1/w,
-//a1
 const NameCard = (props: any) => {
 	const { boyNames, girlNames } = props;
 	const [counter, setCounter] = useState(0);
 	const [gender, setGender] = useState(false); // false === boy || true === girl
 
 	const { width, height } = Dimensions.get("window");
-	let position = new Animated.ValueXY();
+	let position :any = new Animated.ValueXY();
 
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
-			position.setValue({ x: gesState.dx, y: gesState.dy });
+			position.setValue({ x: gesState.dx, y: gesState.dy, useNativeDriver: true });
 		},
-		onPanResponderRelease: (evt, gesState) => {},
+		onPanResponderRelease: (evt, gestureState) => {
+			if (gestureState.dx > 120) {
+				Animated.spring(position, {
+					toValue: { x: width + 100, y: gestureState.dy, useNativeDriver: true},
+				}).start(() => {
+					setCounter((prevState: number) => prevState + 1),
+						() => {
+							position.setValue({ x: 0, y: 0, useNativeDriver: true  });
+						};
+				});
+			} else if (gestureState.dx < -120) {
+				Animated.spring(position, {
+					toValue: { x: -width - 100, y: gestureState.dy, useNativeDriver: true },
+				}).start(() => {
+					setCounter((prevState: number) => prevState + 1),
+						() => {
+							position.setValue({ x: 0, y: 0, useNativeDriver: true  });
+						};
+				});
+			} else {
+                Animated.spring(position, {
+                   toValue: { x: 0, y: 0, useNativeDriver: true},
+                   friction: 4
+                   }).start(() => {
+                       position.setValue({x: 0, y: 0, useNativeDriver: true})
+                   })
+                }
+            }
 	});
 
-    let rotate = position.x.interpolate({
-        inputRange: [-width / 2, 0, width/2],
-        outputRange: ['-10deg', '0deg', '10deg'],
-        extrapolate: 'clamp'
-    })
+	let rotate = position.x.interpolate({
+		inputRange: [-width / 2, 0, width / 2],
+		outputRange: ["-10deg", "0deg", "10deg"],
+		extrapolate: "clamp",
+        useNativeDriver: true,
+	});
+	let nextCardOpacity = position.x.interpolate({
+		inputRange: [-width / 2, 0, width / 2],
+		outputRange: [1, 0, 1],
+		extrapolate: "clamp",
+        useNativeDriver: true,
+	});
 
-    const rotateAndTranslate = {
-        transform: [{
-          rotate: rotate
-        },
-        ...position.getTranslateTransform()
-        ]
-     }
+	let nextCardScale = position.x.interpolate({
+		inputRange: [-width / 2, 0, width / 2],
+		outputRange: [1, 0.8, 1],
+		extrapolate: "clamp",
+        useNativeDriver: true,
+	});
+
+	const rotateAndTranslate = {
+		transform: [
+			{
+				rotate: rotate,
+			},
+			...position.getTranslateTransform(),
+		],
+        useNativeDriver: true
+	};
 
 	return (
 		<View style={styles.container}>
@@ -81,7 +118,8 @@ const NameCard = (props: any) => {
 							<Animated.View
 								{...panResponder.panHandlers}
 								key={babyName.id}
-								style={[rotateAndTranslate,
+								style={[
+									rotateAndTranslate,
 									{ ...styles.boyCard },
 								]}
 							>
@@ -92,7 +130,13 @@ const NameCard = (props: any) => {
 						return (
 							<Animated.View
 								key={babyName.id}
-								style={styles.boyCard}
+								style={[
+									{
+										opacity: nextCardOpacity,
+										transform: [{ scale: nextCardScale }],
+									},
+									styles.boyCard,
+								]}
 							>
 								<Text style={styles.name}>{babyName.name}</Text>
 							</Animated.View>
