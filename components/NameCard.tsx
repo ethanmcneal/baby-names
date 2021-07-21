@@ -60,49 +60,6 @@ const NameCard = (props: any) => {
 		},
 		onPanResponderRelease: onRelease,
 	});
-
-	
-
-        // const renderNames = (names :Array<Name>) => {
-        //     return names.map((babyName :Name, i: number) => {
-        //         if (i < counter) {
-        //             return null;
-        //         } else if (i === counter) {
-        //             return (
-        //                 <Animated.View
-        //                     {...panResponder.panHandlers}
-        //                     key={babyName.id}
-        //                     style={gender ? 
-        //                        [ rotateAndTranslate,
-        //                         { ...styles.girlCard },
-        //                     ] : [
-        //                         rotateAndTranslate,
-        //                         { ...styles.boyCard },
-        //                     ]}
-        //                 >
-        //                     <Text style={styles.name}>{babyName.name}</Text>
-        //                 </Animated.View>
-        //             );
-        //         } else {
-        //             return (
-        //                 <Animated.View
-        //                     key={babyName.id}
-        //                     style={[
-        //                         {
-        //                             opacity: nextCardOpacity,
-        //                             transform: [{ scale: nextCardScale }],
-        //                         },
-        //                         gender ? styles.girlCard : styles.boyCard,
-        //                     ]}
-        //                 >
-        //                     <Text style={styles.name}>{babyName.name}</Text>
-        //                 </Animated.View>
-        //             );
-        //         }
-        //     })
-        //     .reverse()}
-        
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.buttonContainer}>
