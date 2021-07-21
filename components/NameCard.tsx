@@ -60,7 +60,11 @@ const NameCard = (props: any) => {
 				</TouchableOpacity>
 			</View>
 			{boyNames
-				.map((babyName: Name) => (
+				.map((babyName: Name, i :number) => {
+                    if(i < counter){return null;}
+                    else if(i === counter){
+                        return(
+
 					<Animated.View
 						{...panResponder.panHandlers}
 						key={babyName.id}
@@ -70,8 +74,16 @@ const NameCard = (props: any) => {
 						]}
 					>
 						<Text style={styles.name}>{babyName.name}</Text>
+					</Animated.View>)} else {
+                        return (
+                            <Animated.View
+						key={babyName.id}
+						style={styles.boyCard}>
+						<Text style={styles.name}>{babyName.name}</Text>
 					</Animated.View>
-				))
+                        )
+                    }
+                })
 				.reverse()}
 			{/* <View style={styles.buttonContainer}>
 				<TouchableOpacity
