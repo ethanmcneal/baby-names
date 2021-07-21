@@ -15,7 +15,7 @@ export default function Home() {
   const girlNames = useSelector((state :any) => state.names.girlNames)
 
   return (
-      <ScrollView style={styles.screen}>
+      <View style={styles.screen}>
     <View style={styles.container}>
       <View style={styles.separator}/>
       <Text> Baby Names</Text>
@@ -23,7 +23,7 @@ export default function Home() {
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
       <View style={styles.separator}  />
     </View>
-      </ScrollView>
+      </View>
   );
 }
 

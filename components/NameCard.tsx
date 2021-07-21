@@ -24,13 +24,12 @@ const NameCard = (props: any) => {
 	const [gender, setGender] = useState(false); // false === boy || true === girl
 
 	const { width, height } = Dimensions.get("window");
-    const initialPosition :any = new Animated.ValueXY()
-	const [position, setPosition] = useState(initialPosition);
+	let position = new Animated.ValueXY
 
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
-			setPosition({ x: gesState.dx, y: gesState.dy });
+			position.setValue({ x: gesState.dx, y: gesState.dy });
 		},
 	    onPanResponderRelease: (evt, gesState) => {},
 		});
@@ -121,6 +120,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		width: "100%",
 		position: "absolute",
+        top: '50%',
 	},
 	name: {
 		fontSize: 22,
