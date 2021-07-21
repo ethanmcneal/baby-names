@@ -1,4 +1,3 @@
-
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import {
@@ -16,6 +15,7 @@ import { Text, View } from "./Themed";
 //sin(a) = a1/h
 //a1 = hsin(a)
 
+
 //cos(a) = a1/w,
 //a1
 const NameCard = (props: any) => {
@@ -24,16 +24,29 @@ const NameCard = (props: any) => {
 	const [gender, setGender] = useState(false); // false === boy || true === girl
 
 	const { width, height } = Dimensions.get("window");
-	let position = new Animated.ValueXY
+	let position = new Animated.ValueXY();
 
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
 			position.setValue({ x: gesState.dx, y: gesState.dy });
 		},
-	    onPanResponderRelease: (evt, gesState) => {},
-		});
+		onPanResponderRelease: (evt, gesState) => {},
+	});
 
+    let rotate = position.x.interpolate({
+        inputRange: [-width / 2, 0, width/2],
+        outputRange: ['-10deg', '0deg', '10deg'],
+        extrapolate: 'clamp'
+    })
+
+    const rotateAndTranslate = {
+        transform: [{
+          rotate: rotate
+        },
+        ...position.getTranslateTransform()
+        ]
+     }
 
 	return (
 		<View style={styles.container}>
@@ -60,30 +73,32 @@ const NameCard = (props: any) => {
 				</TouchableOpacity>
 			</View>
 			{boyNames
-				.map((babyName: Name, i :number) => {
-                    if(i < counter){return null;}
-                    else if(i === counter){
-                        return(
-
-					<Animated.View
-						{...panResponder.panHandlers}
-						key={babyName.id}
-						style={[
-							{ transform: position.getTranslateTransform() },
-							{ ...styles.boyCard },
-						]}
-					>
-						<Text style={styles.name}>{babyName.name}</Text>
-					</Animated.View>)} else {
-                        return (
-                            <Animated.View
-						key={babyName.id}
-						style={styles.boyCard}>
-						<Text style={styles.name}>{babyName.name}</Text>
-					</Animated.View>
-                        )
-                    }
-                })
+				.map((babyName: Name, i: number) => {
+					if (i < counter) {
+						return null;
+					} else if (i === counter) {
+						return (
+							<Animated.View
+								{...panResponder.panHandlers}
+								key={babyName.id}
+								style={[rotateAndTranslate,
+									{ ...styles.boyCard },
+								]}
+							>
+								<Text style={styles.name}>{babyName.name}</Text>
+							</Animated.View>
+						);
+					} else {
+						return (
+							<Animated.View
+								key={babyName.id}
+								style={styles.boyCard}
+							>
+								<Text style={styles.name}>{babyName.name}</Text>
+							</Animated.View>
+						);
+					}
+				})
 				.reverse()}
 			{/* <View style={styles.buttonContainer}>
 				<TouchableOpacity
@@ -132,7 +147,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		width: "100%",
 		position: "absolute",
-        top: '50%',
+		top: "50%",
 	},
 	name: {
 		fontSize: 22,
