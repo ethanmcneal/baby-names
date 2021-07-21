@@ -10,6 +10,7 @@ import {
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Value } from "react-native-reanimated";
 import { Name } from "../types";
+import AnimatedCard from "./AnimatedCard";
 import { Text, View } from "./Themed";
 
 const NameCard = (props: any) => {
@@ -60,73 +61,46 @@ const NameCard = (props: any) => {
 		onPanResponderRelease: onRelease,
 	});
 
-	let rotate = position.x.interpolate({
-		inputRange: [-width / 2, 0, width / 2],
-		outputRange: ["-15deg", "0deg", "15deg"],
-		extrapolate: "clamp",
-        useNativeDriver: true,
-	});
-	let nextCardOpacity = position.x.interpolate({
-		inputRange: [-width / 2, 0, width / 2],
-		outputRange: [1, 0, 1],
-		extrapolate: "clamp",
-        useNativeDriver: true,
-	});
+	
 
-	let nextCardScale = position.x.interpolate({
-		inputRange: [-width / 2, 0, width / 2],
-		outputRange: [1, 0.8, 1],
-		extrapolate: "clamp",
-        useNativeDriver: true,
-	});
-
-	const rotateAndTranslate = {
-		transform: [
-			{
-				rotate: rotate,
-			},
-			...position.getTranslateTransform(),
-		],
-    	};
-
-        const renderNames = (names :Array<Name>) => {
-            return names.map((babyName :Name, i: number) => {
-                if (i < counter) {
-                    return null;
-                } else if (i === counter) {
-                    return (
-                        <Animated.View
-                            {...panResponder.panHandlers}
-                            key={babyName.id}
-                            style={gender ? 
-                               [ rotateAndTranslate,
-                                { ...styles.girlCard },
-                            ] : [
-                                rotateAndTranslate,
-                                { ...styles.boyCard },
-                            ]}
-                        >
-                            <Text style={styles.name}>{babyName.name}</Text>
-                        </Animated.View>
-                    );
-                } else {
-                    return (
-                        <Animated.View
-                            key={babyName.id}
-                            style={[
-                                {
-                                    opacity: nextCardOpacity,
-                                    transform: [{ scale: nextCardScale }],
-                                },
-                                gender ? styles.girlCard : styles.boyCard,
-                            ]}
-                        >
-                            <Text style={styles.name}>{babyName.name}</Text>
-                        </Animated.View>
-                    );
-                }
-            })
-            .reverse()}
+        // const renderNames = (names :Array<Name>) => {
+        //     return names.map((babyName :Name, i: number) => {
+        //         if (i < counter) {
+        //             return null;
+        //         } else if (i === counter) {
+        //             return (
+        //                 <Animated.View
+        //                     {...panResponder.panHandlers}
+        //                     key={babyName.id}
+        //                     style={gender ? 
+        //                        [ rotateAndTranslate,
+        //                         { ...styles.girlCard },
+        //                     ] : [
+        //                         rotateAndTranslate,
+        //                         { ...styles.boyCard },
+        //                     ]}
+        //                 >
+        //                     <Text style={styles.name}>{babyName.name}</Text>
+        //                 </Animated.View>
+        //             );
+        //         } else {
+        //             return (
+        //                 <Animated.View
+        //                     key={babyName.id}
+        //                     style={[
+        //                         {
+        //                             opacity: nextCardOpacity,
+        //                             transform: [{ scale: nextCardScale }],
+        //                         },
+        //                         gender ? styles.girlCard : styles.boyCard,
+        //                     ]}
+        //                 >
+        //                     <Text style={styles.name}>{babyName.name}</Text>
+        //                 </Animated.View>
+        //             );
+        //         }
+        //     })
+        //     .reverse()}
         
 
 	return (
@@ -176,19 +150,13 @@ const NameCard = (props: any) => {
 					<Text>Like</Text>
 				</TouchableOpacity>
 			</View>
-            {renderNames(gender ? girlNames : boyNames)}
+            <AnimatedCard names={gender ? girlNames : boyNames} counter={counter}
+             panResponder={panResponder} position={position} gender={gender}/>
 		</View>
 	);
 };
 
-const card :any = {
-		height: 300,
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
-		position: "absolute",
-		top: "70%",
-}
+
 
 const styles = StyleSheet.create({
 	container: {
@@ -196,17 +164,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	boyCard: {
-        ...card,
-        backgroundColor: "#05BCEE"
-    },
-    girlCard: {
-        ...card,
-		backgroundColor: 'pink'
-	},
-	name: {
-		fontSize: 22,
-	},
+	
 	buttonContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
