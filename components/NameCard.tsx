@@ -96,7 +96,10 @@ const NameCard = (props: any) => {
                         <Animated.View
                             {...panResponder.panHandlers}
                             key={babyName.id}
-                            style={[
+                            style={gender ? 
+                               [ rotateAndTranslate,
+                                { ...styles.girlCard },
+                            ] : [
                                 rotateAndTranslate,
                                 { ...styles.boyCard },
                             ]}
@@ -113,7 +116,7 @@ const NameCard = (props: any) => {
                                     opacity: nextCardOpacity,
                                     transform: [{ scale: nextCardScale }],
                                 },
-                                styles.boyCard,
+                                gender ? styles.girlCard : styles.boyCard,
                             ]}
                         >
                             <Text style={styles.name}>{babyName.name}</Text>
@@ -175,28 +178,28 @@ const NameCard = (props: any) => {
 	);
 };
 
+const card :any = {
+		height: 300,
+		alignItems: "center",
+		justifyContent: "center",
+		width: "100%",
+		position: "absolute",
+		top: "70%",
+}
+
 const styles = StyleSheet.create({
 	container: {
 		width: "75%",
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	girlCard: {
-		height: 300,
-		backgroundColor: "pink",
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
-		position: "absolute",
-	},
 	boyCard: {
-		height: 300,
-		backgroundColor: "#05BCEE",
-		alignItems: "center",
-		justifyContent: "center",
-		width: "100%",
-		position: "absolute",
-		top: "70%",
+        ...card,
+        backgroundColor: "#05BCEE"
+    },
+    girlCard: {
+        ...card,
+		backgroundColor: 'pink'
 	},
 	name: {
 		fontSize: 22,
