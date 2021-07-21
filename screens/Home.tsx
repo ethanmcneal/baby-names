@@ -17,11 +17,9 @@ export default function Home() {
   return (
       <View style={styles.screen}>
     <View style={styles.container}>
-      <View style={styles.separator}/>
       <Text> Baby Names</Text>
       {/* <NameCard boyNames={boyNames} girlNames={girlNames}/> */}
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
-      <View style={styles.separator}  />
     </View>
       </View>
   );

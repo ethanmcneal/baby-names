@@ -28,7 +28,8 @@ const NameCard = (props: any) => {
 		onPanResponderRelease: (evt, gestureState) => {
 			if (gestureState.dx > 120) {
 				Animated.spring(position, {
-					toValue: { x: width + 100, y: gestureState.dy, useNativeDriver: true},
+					toValue: { x: width + 100, y: gestureState.dy},
+                    useNativeDriver: false
 				}).start(() => {
 					setCounter((prevState: number) => prevState + 1),
 						() => {
@@ -37,7 +38,8 @@ const NameCard = (props: any) => {
 				});
 			} else if (gestureState.dx < -120) {
 				Animated.spring(position, {
-					toValue: { x: -width - 100, y: gestureState.dy, useNativeDriver: true },
+					toValue: { x: -width - 100, y: gestureState.dy}, 
+                    useNativeDriver: false 
 				}).start(() => {
 					setCounter((prevState: number) => prevState + 1),
 						() => {
@@ -46,13 +48,14 @@ const NameCard = (props: any) => {
 				});
 			} else {
                 Animated.spring(position, {
-                   toValue: { x: 0, y: 0, useNativeDriver: true},
+                   toValue: { x: 0, y: 0},
+                   useNativeDriver: false,
                    friction: 4
                    }).start(() => {
                        position.setValue({x: 0, y: 0, useNativeDriver: true})
                    })
                 }
-            }
+            },
 	});
 
 	let rotate = position.x.interpolate({
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		width: "100%",
 		position: "absolute",
-		top: "50%",
+		top: "70%",
 	},
 	name: {
 		fontSize: 22,
