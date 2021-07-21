@@ -20,47 +20,49 @@ const NameCard = (props: any) => {
 	const { width, height } = Dimensions.get("window");
 	let position :any = new Animated.ValueXY();
 
+    const onRelease = (evt :any, gestureState :any) => {
+        if (gestureState.dx > 120) {
+            Animated.spring(position, {
+                toValue: { x: width + 100, y: gestureState.dy},
+                useNativeDriver: false
+            }).start(() => {
+                setCounter((prevState: number) => prevState + 1),
+                    () => {
+                        position.setValue({ x: 0, y: 0});
+                    };
+            });
+        } else if (gestureState.dx < -120) {
+            Animated.spring(position, {
+                toValue: { x: -width - 100, y: gestureState.dy}, 
+                useNativeDriver: false 
+            }).start(() => {
+                setCounter((prevState: number) => prevState + 1),
+                    () => {
+                        position.setValue({ x: 0, y: 0});
+                    };
+            });
+        } else {
+            Animated.spring(position, {
+               toValue: { x: 0, y: 0},
+               useNativeDriver: false,
+               friction: 4
+               }).start(() => {
+                   position.setValue({x: 0, y: 0})
+               })
+            }
+        }
+
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
 			position.setValue({ x: gesState.dx, y: gesState.dy});
 		},
-		onPanResponderRelease: (evt, gestureState) => {
-			if (gestureState.dx > 120) {
-				Animated.spring(position, {
-					toValue: { x: width + 100, y: gestureState.dy},
-                    useNativeDriver: false
-				}).start(() => {
-					setCounter((prevState: number) => prevState + 1),
-						() => {
-							position.setValue({ x: 0, y: 0});
-						};
-				});
-			} else if (gestureState.dx < -120) {
-				Animated.spring(position, {
-					toValue: { x: -width - 100, y: gestureState.dy}, 
-                    useNativeDriver: false 
-				}).start(() => {
-					setCounter((prevState: number) => prevState + 1),
-						() => {
-							position.setValue({ x: 0, y: 0});
-						};
-				});
-			} else {
-                Animated.spring(position, {
-                   toValue: { x: 0, y: 0},
-                   useNativeDriver: false,
-                   friction: 4
-                   }).start(() => {
-                       position.setValue({x: 0, y: 0})
-                   })
-                }
-            },
+		onPanResponderRelease: onRelease,
 	});
 
 	let rotate = position.x.interpolate({
 		inputRange: [-width / 2, 0, width / 2],
-		outputRange: ["-10deg", "0deg", "10deg"],
+		outputRange: ["-15deg", "0deg", "15deg"],
 		extrapolate: "clamp",
         useNativeDriver: true,
 	});
@@ -151,10 +153,10 @@ const NameCard = (props: any) => {
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
 			</View>
-			{renderNames(gender ? girlNames : boyNames)}
+			
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
-					onPress={() => setCounter((prev) => prev + 1)}
+					onPress={() => {onRelease(null, {dx: -121, dy:0})}}
 				>
 					<Ionicons
 						name={"heart-dislike-circle-outline"}
@@ -164,7 +166,7 @@ const NameCard = (props: any) => {
 					<Text>Dislike</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={() => setCounter((prev) => prev + 1)}
+					onPress={() => {onRelease(null, {dx: 121, dy:0})}}
 				>
 					<Ionicons
 						name={"heart-circle-outline"}
@@ -174,6 +176,7 @@ const NameCard = (props: any) => {
 					<Text>Like</Text>
 				</TouchableOpacity>
 			</View>
+            {renderNames(gender ? girlNames : boyNames)}
 		</View>
 	);
 };
