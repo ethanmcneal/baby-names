@@ -1,14 +1,10 @@
-import { Ionicons } from "@expo/vector-icons";
+
 import React, { useEffect, useState } from "react";
 import {
 	Animated,
-	Button,
 	Dimensions,
-	PanResponder,
 	StyleSheet,
 } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { Value } from "react-native-reanimated";
 import { Name } from "../types";
 import { Text, View } from "./Themed";
 

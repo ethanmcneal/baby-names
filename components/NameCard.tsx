@@ -7,9 +7,7 @@ import {
 	PanResponder,
 	StyleSheet,
 } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import { Value } from "react-native-reanimated";
-import { Name } from "../types";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import AnimatedCard from "./AnimatedCard";
 import { Text, View } from "./Themed";
 
@@ -20,13 +18,16 @@ const NameCard = (props: any) => {
 
 	const { width, height } = Dimensions.get("window");
 	let position :any = new Animated.ValueXY();
-
     const onRelease = (evt :any, gestureState :any) => {
+        
         if (gestureState.dx > 120) {
             Animated.spring(position, {
-                toValue: { x: width + 100, y: gestureState.dy},
-                useNativeDriver: false
-            }).start(() => {
+                toValue: { x: width, y: gestureState.dy},
+                useNativeDriver: false,
+                bounciness: 0,
+                speed: 15,
+            }
+            ).start(() => {
                 setCounter((prevState: number) => prevState + 1),
                     () => {
                         position.setValue({ x: 0, y: 0});
@@ -60,6 +61,10 @@ const NameCard = (props: any) => {
 		},
 		onPanResponderRelease: onRelease,
 	});
+
+    const handleLike = (dx :number) => {
+        onRelease(null, {dx: dx, dy:0})
+    }
 	return (
 		<View style={styles.container}>
 			<View style={styles.buttonContainer}>
@@ -87,24 +92,22 @@ const NameCard = (props: any) => {
 			
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
-					onPress={() => {onRelease(null, {dx: -121, dy:0})}}
+					onPress={() => handleLike(-121)} // pass a num > 120 for like || num < -120 for dislike
 				>
 					<Ionicons
 						name={"heart-dislike-circle-outline"}
-						size={40}
+						size={45}
 						color="red"
 					/>
-					<Text>Dislike</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={() => {onRelease(null, {dx: 121, dy:0})}}
+					onPress={() => handleLike(121)}
 				>
 					<Ionicons
 						name={"heart-circle-outline"}
-						size={40}
+						size={45}
 						color="green"
 					/>
-					<Text>Like</Text>
 				</TouchableOpacity>
 			</View>
             <AnimatedCard names={gender ? girlNames : boyNames} counter={counter}
