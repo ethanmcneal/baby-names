@@ -18,7 +18,6 @@ export default function Home() {
       <View style={styles.screen}>
     <View style={styles.container}>
       <Text> Baby Names</Text>
-      {/* <NameCard boyNames={boyNames} girlNames={girlNames}/> */}
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
     </View>
       </View>

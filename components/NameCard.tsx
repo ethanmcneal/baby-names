@@ -8,13 +8,16 @@ import {
 	StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useDispatch } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { Text, View } from "./Themed";
+import * as nameActions from '../store/actions/name'
 
 const NameCard = (props: any) => {
 	const { boyNames, girlNames } = props;
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState(false); // false === boy || true === girl
+    const dispatch = useDispatch()
 
 	const { width, height } = Dimensions.get("window");
 	let position :any = new Animated.ValueXY();
@@ -27,7 +30,8 @@ const NameCard = (props: any) => {
                 speed: 15,
             }
             ).start(() => {
-                setIndex(prevNum => prevNum + 1),
+                setIndex(prevNum => prevNum + 1)
+                dispatch(nameActions.likeName(gender ? girlNames[index] : boyNames[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -38,7 +42,8 @@ const NameCard = (props: any) => {
                 useNativeDriver: false,
                 speed: 15,
             }).start(() => {
-                setIndex((prevState: number) => prevState + 1),
+                setIndex((prevState: number) => prevState + 1)
+                dispatch(nameActions.dislikeName(gender ? girlNames[index] : boyNames[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -93,7 +98,7 @@ const NameCard = (props: any) => {
 			
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
-					onPress={() => handleLike(-121)} // pass a num > 120 for like || num < -120 for dislike
+					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
 				>
 					<Ionicons
 						name={"heart-dislike-circle-outline"}

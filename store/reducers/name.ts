@@ -11,10 +11,16 @@ const initialState = {
 export default (state :NameState = initialState, action :any) => {
     switch (action.type) {
         case LIKE_NAME:
-            
+            return {
+                ...state, 
+                likedNames: state.likedNames.concat(action.name)
+            }
             break;
         case DISLIKE_NAME:
-
+            return {
+                ...state, 
+                dislikedNames: state.dislikedNames.concat(action.name)
+            }
             break;
         default:
             return state
