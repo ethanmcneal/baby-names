@@ -18,7 +18,7 @@ const AnimatedCard = (props :any) => {
 
     let rotate = position.x.interpolate({
 		inputRange: [-width / 2, 0, width / 2],
-		outputRange: ["-15deg", "0deg", "15deg"],
+		outputRange: ["-8deg", "0deg", "8deg"],
 		extrapolate: "clamp",
 	});
 	let nextCardOpacity = position.x.interpolate({

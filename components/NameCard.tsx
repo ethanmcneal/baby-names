@@ -13,7 +13,7 @@ import { Text, View } from "./Themed";
 
 const NameCard = (props: any) => {
 	const { boyNames, girlNames } = props;
-	const [counter, setCounter] = useState(0);
+	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState(false); // false === boy || true === girl
 
 	const { width, height } = Dimensions.get("window");
@@ -22,13 +22,12 @@ const NameCard = (props: any) => {
         
         if (gestureState.dx > 120) {
             Animated.spring(position, {
-                toValue: { x: width, y: gestureState.dy},
+                toValue: { x: width + 100, y: gestureState.dy},
                 useNativeDriver: false,
-                bounciness: 0,
                 speed: 15,
             }
             ).start(() => {
-                setCounter((prevState: number) => prevState + 1),
+                setIndex(prevNum => prevNum + 1),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -36,9 +35,10 @@ const NameCard = (props: any) => {
         } else if (gestureState.dx < -120) {
             Animated.spring(position, {
                 toValue: { x: -width - 100, y: gestureState.dy}, 
-                useNativeDriver: false 
+                useNativeDriver: false,
+                speed: 15,
             }).start(() => {
-                setCounter((prevState: number) => prevState + 1),
+                setIndex((prevState: number) => prevState + 1),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -47,7 +47,7 @@ const NameCard = (props: any) => {
             Animated.spring(position, {
                toValue: { x: 0, y: 0},
                useNativeDriver: false,
-               friction: 4
+               bounciness: 2,
                }).start(() => {
                    position.setValue({x: 0, y: 0})
                })
@@ -64,6 +64,7 @@ const NameCard = (props: any) => {
 
     const handleLike = (dx :number) => {
         onRelease(null, {dx: dx, dy:0})
+        
     }
 	return (
 		<View style={styles.container}>
@@ -110,7 +111,7 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-            <AnimatedCard names={gender ? girlNames : boyNames} counter={counter}
+            <AnimatedCard names={gender ? girlNames : boyNames} counter={index}
              panResponder={panResponder} position={position} gender={gender}/>
 		</View>
 	);
