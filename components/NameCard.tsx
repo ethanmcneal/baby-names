@@ -8,7 +8,7 @@ import {
 	StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { Text, View } from "./Themed";
 import * as nameActions from '../store/actions/name'
@@ -17,6 +17,7 @@ const NameCard = (props: any) => {
 	const { boyNames, girlNames } = props;
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState(false); // false === boy || true === girl
+    const lastIndex = useSelector((state :any) => state.names.lastIndex)
     const dispatch = useDispatch()
 
 	const { width, height } = Dimensions.get("window");
@@ -31,7 +32,7 @@ const NameCard = (props: any) => {
             }
             ).start(() => {
                 setIndex(prevNum => prevNum + 1)
-                dispatch(nameActions.likeName(gender ? (girlNames[index], 'girl') : boyNames[index], 'boy')),
+                dispatch(gender ? nameActions.likeName(girlNames[index], 'girl') : nameActions.likeName(boyNames[index], 'boy')),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -71,6 +72,11 @@ const NameCard = (props: any) => {
         onRelease(null, {dx: dx, dy:0})
         
     }
+
+    const handleGenderButton = (genderBoolean :boolean) => {
+        setGender(genderBoolean)
+        genderBoolean ? setIndex(lastIndex.girl) : setIndex(lastIndex.boy)
+    }
 	return (
 		<View style={styles.container}>
 			<View style={styles.buttonContainer}>
@@ -80,7 +86,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => setGender(false)}
+					onPress={() => handleGenderButton(false)}
 				>
 					<Ionicons name={"male-outline"} size={40} color="blue" />
 				</TouchableOpacity>
@@ -90,7 +96,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => setGender(true)}
+					onPress={() => handleGenderButton(true)}
 				>
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>

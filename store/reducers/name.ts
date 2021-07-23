@@ -6,7 +6,7 @@ const initialState = {
 	girlNames: Names.names.girlNames,
 	likedNames: [],
 	dislikedNames: [],
-	lastIndex: { boy: -1, girl: -1 },
+	lastIndex: { boy: 0, girl: 0 },
 };
 
 export default (state: NameState = initialState, action: any) => {
