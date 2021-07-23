@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Appearance, StyleSheet } from 'react-native';
+import { Appearance, Button, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSelector, useStore } from 'react-redux';
 import Names from '../assets/data.json'
@@ -10,7 +10,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import { NameState } from '../types';
 const colorScheme = Appearance.getColorScheme()
 
-export default function Home() {
+export default function Home(props :any) {
   const boyNames = useSelector((state :any) => state.names.boyNames)
   const girlNames = useSelector((state :any) => state.names.girlNames)
 
@@ -19,6 +19,9 @@ export default function Home() {
     <View style={styles.container}>
       <Text> Baby Names</Text>
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
+    </View>
+    <View>
+    <Button title='liked names' onPress={() => {props.navigation.navigate('Liked Names')}}/>
     </View>
       </View>
   );
