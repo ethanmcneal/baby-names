@@ -20,13 +20,11 @@ export default (state: NameState = initialState, action: any) => {
 						? { boy: state.lastIndex.boy, girl: action.name.id }
 						: { boy: action.name.id, girl: state.lastIndex.girl },
 			};
-			break;
 		case DISLIKE_NAME:
 			return {
 				...state,
 				dislikedNames: state.dislikedNames.concat(action.name),
 			};
-			break;
 		default:
 			return state;
 	}
