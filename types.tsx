@@ -33,4 +33,5 @@ export type NameState = {
   girlNames: Array<Name>,
   likedNames: Array<Name>,
   dislikedNames: Array<Name>,
+  lastIndex: any
 }

@@ -31,7 +31,7 @@ const NameCard = (props: any) => {
             }
             ).start(() => {
                 setIndex(prevNum => prevNum + 1)
-                dispatch(nameActions.likeName(gender ? girlNames[index] : boyNames[index])),
+                dispatch(nameActions.likeName(gender ? (girlNames[index], 'girl') : boyNames[index], 'boy')),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -43,7 +43,7 @@ const NameCard = (props: any) => {
                 speed: 15,
             }).start(() => {
                 setIndex((prevState: number) => prevState + 1)
-                dispatch(nameActions.dislikeName(gender ? girlNames[index] : boyNames[index])),
+                dispatch(nameActions.dislikeName(gender ? (girlNames[index], 'girl') : boyNames[index], 'boy')),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
