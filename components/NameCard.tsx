@@ -15,8 +15,9 @@ import * as nameActions from '../store/actions/name'
 import { Name } from "../types";
 
 const NameCard = (props: any) => {
-	const { names } = props;
-	const [index, setIndex] = useState(1);
+	const { initialNames } = props;
+	const [names, setNames] = useState(initialNames)
+	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState('boy'); // false === boy || true === girl
     const dispatch = useDispatch()
 
@@ -73,8 +74,8 @@ const NameCard = (props: any) => {
 
     const handleGenderButton = (genderChange :string) => {
        	setGender(genderChange)
-		let nextIndex = names.find((name :Name) => name.gender === genderChange).id
-        setIndex(nextIndex)
+		console.log(names)
+        setIndex(genderChange === 'girl' ? 100 : 0)
     }
 	return (
 		<View style={styles.container}>

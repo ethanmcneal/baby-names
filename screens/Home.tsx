@@ -17,7 +17,7 @@ export default function Home(props :any) {
       <View style={styles.screen}>
     <View style={styles.container}>
       <Text> Baby Names</Text>
-      <NameCard names={names}/>
+      <NameCard initialNames={names}/>
     </View>
       </View>
   );
