@@ -14,7 +14,7 @@ export default (state: NameState = initialState, action: any) => {
 		case LIKE_NAME:
 			return {
 				...state,
-				likedNames: state.likedNames.concat(action.name),
+				likedNames: state.likedNames.concat({...action.name, gender: action.gender}),
 				lastIndex:
 					action.gender === "girl"
 						? { boy: state.lastIndex.boy, girl: action.name.id }
