@@ -10,7 +10,7 @@ const LikedNamesScreen = () => {
     return(
         <View>
             <FlatList data={likedNames} 
-            keyExtractor={(name) => name.id}
+            keyExtractor={(name) => name.id.toString()}
             renderItem={(nameData) => (
                 <LikedName nameData={nameData} />
             )}/>
