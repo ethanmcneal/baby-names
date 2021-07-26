@@ -26,11 +26,11 @@ export type TabTwoParamList = {
 export type Name = {
   id: number,
   name: string,
+  gender: string,
 }
 
 export type NameState = {
-  boyNames: Array<Name>,
-  girlNames: Array<Name>,
+  names: Array<Name>,
   likedNames: Array<Name>,
   dislikedNames: Array<Name>,
   lastIndex: any

@@ -2,8 +2,7 @@ import Names from "../../assets/data.json";
 import { NameState } from "../../types";
 import { DISLIKE_NAME, LIKE_NAME } from "../actions/name";
 const initialState = {
-	boyNames: Names.names.boyNames,
-	girlNames: Names.names.girlNames,
+	names: Names.names,
 	likedNames: [],
 	dislikedNames: [],
 	lastIndex: { boy: 0, girl: 0 },
@@ -14,11 +13,9 @@ export default (state: NameState = initialState, action: any) => {
 		case LIKE_NAME:
 			return {
 				...state,
-				likedNames: state.likedNames.concat({...action.name, gender: action.gender}),
-				lastIndex:
-					action.gender === "girl"
-						? { boy: state.lastIndex.boy, girl: action.name.id }
-						: { boy: action.name.id, girl: state.lastIndex.girl },
+				likedNames: state.likedNames.concat(action.name),
+				lastIndex: state.lastIndex[action.gender] = action.name.id 
+
 			};
 		case DISLIKE_NAME:
 			return {
