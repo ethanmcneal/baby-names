@@ -10,7 +10,7 @@ import React from 'react'
 import { useThemeColor } from "../components/Themed";
 import { Appearance } from "react-native";
 import Colors from "../constants/Colors";
-import LikedNames from "../screens/LikedNames";
+import LikedNamesScreen from "../screens/LikedNamesScreen";
 
 
 
@@ -23,7 +23,7 @@ const navigationOptions = {
     headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
 }
 const ComponentNavigator = createStackNavigator({
-    "Liked Names": LikedNames
+    "Liked Names": LikedNamesScreen
 },  {
     defaultNavigationOptions: navigationOptions
 })
