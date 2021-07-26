@@ -33,5 +33,4 @@ export type NameState = {
   names: Array<Name>,
   likedNames: Array<Name>,
   dislikedNames: Array<Name>,
-  lastIndex: any
 }

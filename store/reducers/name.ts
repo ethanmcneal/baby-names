@@ -5,7 +5,6 @@ const initialState = {
 	names: Names.names,
 	likedNames: [],
 	dislikedNames: [],
-	lastIndex: { boy: 0, girl: 0 },
 };
 
 export default (state: NameState = initialState, action: any) => {
@@ -13,14 +12,14 @@ export default (state: NameState = initialState, action: any) => {
 		case LIKE_NAME:
 			return {
 				...state,
+				names: state.names.filter(name => name.id != action.name.id),
 				likedNames: state.likedNames.concat(action.name),
-				lastIndex: state.lastIndex[action.gender] = action.name.id 
-
 			};
 		case DISLIKE_NAME:
 			return {
 				...state,
-				dislikedNames: state.dislikedNames.concat(action.name),
+				names: state.names.filter(name => name.id != action.name.id),
+				dislikedNames: state.likedNames.concat(action.name),
 			};
 		default:
 			return state;
