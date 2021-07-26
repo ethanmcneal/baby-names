@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get("window");
 
 const AnimatedCard = (props :any) => {
     
-    const {names, counter, panResponder, position, gender} = props
+    const {names, index, panResponder, position, gender} = props
 
     let rotate = position.x.interpolate({
 		inputRange: [-width / 2, 0, width / 2],
@@ -43,14 +43,14 @@ const AnimatedCard = (props :any) => {
     	};
 
     return (names.map((babyName :Name, i: number) => {
-        if (i < counter) {
+        if (i < index) {
             return null;
-        } else if (i === counter) {
+        } else if (i === index) {
             return (
                 <Animated.View
                     {...panResponder.panHandlers}
                     key={babyName.id}
-                    style={gender ? 
+                    style={gender === 'girl' ? 
                        [ rotateAndTranslate,
                         { ...styles.girlCard },
                     ] : [
@@ -70,7 +70,7 @@ const AnimatedCard = (props :any) => {
                             opacity: nextCardOpacity,
                             transform: [{ scale: nextCardScale }],
                         },
-                        gender ? styles.girlCard : styles.boyCard,
+                        gender === 'girl' ? styles.girlCard : styles.boyCard,
                     ]}
                 >
                     <Text style={styles.name}>{babyName.name}</Text>

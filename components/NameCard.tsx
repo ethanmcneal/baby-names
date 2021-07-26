@@ -84,9 +84,9 @@ const NameCard = (props: any) => {
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity
 					style={
-						gender
-							? styles.genderButton
-							: styles.genderButtonPressed
+						gender === 'boy'
+							? styles.genderButtonPressed
+							: styles.genderButton
 					}
 					onPress={() => handleGenderButton('boy')}
 				>
@@ -94,9 +94,9 @@ const NameCard = (props: any) => {
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={
-						!gender
-							? styles.genderButton
-							: styles.genderButtonPressed
+						gender === 'girl'
+							? styles.genderButtonPressed
+							: styles.genderButton
 					}
 					onPress={() => handleGenderButton('girl')}
 				>
@@ -124,7 +124,7 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-            <AnimatedCard names={names} counter={index}
+            <AnimatedCard names={names} index={index}
              panResponder={panResponder} position={position} gender={gender}/>
 		</View>
 	);
