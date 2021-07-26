@@ -23,16 +23,13 @@ const navigationOptions = {
     headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
 }
 const ComponentNavigator = createStackNavigator({
-    MyComponents: MyComponents,
-    SquareCard: SquareCardInfo,
-    CenterView: CenterViewInfo
+    "Liked Names": LikedNames
 },  {
     defaultNavigationOptions: navigationOptions
 })
 
 const HomeNavigator = createStackNavigator({
     Home: Home,
-    "Liked Names": LikedNames
 }, {
     defaultNavigationOptions: navigationOptions
 })

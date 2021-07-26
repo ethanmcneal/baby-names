@@ -20,9 +20,6 @@ export default function Home(props :any) {
       <Text> Baby Names</Text>
       <NameCard boyNames={boyNames} girlNames={girlNames}/>
     </View>
-    <View>
-    <Button title='liked names' onPress={() => {props.navigation.navigate('Liked Names')}}/>
-    </View>
       </View>
   );
 }
