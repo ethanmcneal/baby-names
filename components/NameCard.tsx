@@ -16,9 +16,8 @@ import { Name } from "../types";
 
 const NameCard = (props: any) => {
 	const { names } = props;
-	const [index, setIndex] = useState(0);
+	const [index, setIndex] = useState(1);
 	const [gender, setGender] = useState('boy'); // false === boy || true === girl
-    const lastIndex = useSelector((state :any) => state.names.lastIndex)
     const dispatch = useDispatch()
 
 	const { width, height } = Dimensions.get("window");
@@ -32,7 +31,6 @@ const NameCard = (props: any) => {
                 speed: 15,
             }
             ).start(() => {
-                setIndex(prevNum => prevNum + 1)
                 dispatch(nameActions.likeName(names[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
@@ -44,7 +42,6 @@ const NameCard = (props: any) => {
                 useNativeDriver: false,
                 speed: 15,
             }).start(() => {
-                setIndex((prevState: number) => prevState + 1)
                 dispatch(nameActions.dislikeName(names[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
@@ -76,8 +73,8 @@ const NameCard = (props: any) => {
 
     const handleGenderButton = (genderChange :string) => {
        	setGender(genderChange)
-		let filteredNames = names.filter((name :Name) => name.gender === genderChange)
-        setIndex(filteredNames[0].id)
+		let nextIndex = names.find((name :Name) => name.gender === genderChange).id
+        setIndex(nextIndex)
     }
 	return (
 		<View style={styles.container}>

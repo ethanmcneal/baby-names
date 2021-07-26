@@ -43,9 +43,9 @@ const AnimatedCard = (props :any) => {
     	};
 
     return (names.map((babyName :Name, i: number) => {
-        if (i < index) {
+        if (babyName.id < index) {
             return null;
-        } else if (i === index) {
+        } else if (babyName.id === index) {
             return (
                 <Animated.View
                     {...panResponder.panHandlers}
