@@ -11,14 +11,13 @@ import { NameState } from '../types';
 const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
-  const boyNames = useSelector((state :any) => state.names.boyNames)
-  const girlNames = useSelector((state :any) => state.names.girlNames)
+  const names = useSelector((state :any) => state.names.names)
 
   return (
       <View style={styles.screen}>
     <View style={styles.container}>
       <Text> Baby Names</Text>
-      <NameCard boyNames={boyNames} girlNames={girlNames}/>
+      <NameCard names={names}/>
     </View>
       </View>
   );

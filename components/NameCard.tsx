@@ -12,11 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { Text, View } from "./Themed";
 import * as nameActions from '../store/actions/name'
+import { Name } from "../types";
 
 const NameCard = (props: any) => {
-	const { boyNames, girlNames } = props;
+	const { names } = props;
 	const [index, setIndex] = useState(0);
-	const [gender, setGender] = useState(false); // false === boy || true === girl
+	const [gender, setGender] = useState('boy'); // false === boy || true === girl
     const lastIndex = useSelector((state :any) => state.names.lastIndex)
     const dispatch = useDispatch()
 
@@ -32,7 +33,7 @@ const NameCard = (props: any) => {
             }
             ).start(() => {
                 setIndex(prevNum => prevNum + 1)
-                dispatch(gender ? nameActions.likeName(girlNames[index], 'girl') : nameActions.likeName(boyNames[index], 'boy')),
+                dispatch(nameActions.likeName(names[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -44,7 +45,7 @@ const NameCard = (props: any) => {
                 speed: 15,
             }).start(() => {
                 setIndex((prevState: number) => prevState + 1)
-                dispatch(nameActions.dislikeName(gender ? (girlNames[index], 'girl') : boyNames[index], 'boy')),
+                dispatch(nameActions.dislikeName(names[index])),
                     () => {
                         position.setValue({ x: 0, y: 0});
                     };
@@ -73,9 +74,10 @@ const NameCard = (props: any) => {
         
     }
 
-    const handleGenderButton = (genderBoolean :boolean) => {
-        setGender(genderBoolean)
-        genderBoolean ? setIndex(lastIndex.girl) : setIndex(lastIndex.boy)
+    const handleGenderButton = (genderChange :string) => {
+       	setGender(genderChange)
+		let filteredNames = names.filter((name :Name) => name.gender === genderChange)
+        setIndex(filteredNames[0].id)
     }
 	return (
 		<View style={styles.container}>
@@ -86,7 +88,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => handleGenderButton(false)}
+					onPress={() => handleGenderButton('boy')}
 				>
 					<Ionicons name={"male-outline"} size={40} color="blue" />
 				</TouchableOpacity>
@@ -96,7 +98,7 @@ const NameCard = (props: any) => {
 							? styles.genderButton
 							: styles.genderButtonPressed
 					}
-					onPress={() => handleGenderButton(true)}
+					onPress={() => handleGenderButton('girl')}
 				>
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
@@ -122,7 +124,7 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-            <AnimatedCard names={gender ? girlNames : boyNames} counter={index}
+            <AnimatedCard names={names} counter={index}
              panResponder={panResponder} position={position} gender={gender}/>
 		</View>
 	);
