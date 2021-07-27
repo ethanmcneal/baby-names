@@ -1,6 +1,8 @@
+import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
 import { Appearance, Button, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useStore } from 'react-redux';
 import Names from '../assets/data.json'
 import NameCard from '../components/NameCard';
@@ -12,7 +14,6 @@ const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
   const names = useSelector((state :any) => state.names.names)
-console.log(names)
   return (
       <View style={styles.screen}>
     <View style={styles.container}>
@@ -21,6 +22,24 @@ console.log(names)
     </View>
       </View>
   );
+}
+
+Home.navigationOptions = (navData: any) => {
+	return {
+		headerTitle: "Home",
+		headerLeft: () => {
+			return (
+				<HeaderButtons HeaderButtonComponent={Ionicons}>
+					<Item
+						title="Menu"
+						iconName={"ios-menu"}
+						onPress={() => {
+						}}
+					/>
+				</HeaderButtons>
+			);
+		}
+    }
 }
 
 const styles = StyleSheet.create({

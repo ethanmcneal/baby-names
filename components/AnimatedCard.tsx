@@ -15,7 +15,6 @@ const { width, height } = Dimensions.get("window");
 const AnimatedCard = (props :any) => {
     
     const {names, index, panResponder, position, gender} = props
-    console.log(names, 'NAMES')
 
     let rotate = position.x.interpolate({
 		inputRange: [-width / 2, 0, width / 2],
