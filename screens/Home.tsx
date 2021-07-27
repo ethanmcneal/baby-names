@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useStore } from 'react-redux';
 import Names from '../assets/data.json'
+import CustomHeaderButton from '../components/HeaderButtonComponent';
 import NameCard from '../components/NameCard';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -14,9 +15,19 @@ const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
   const names = useSelector((state :any) => state.names.names)
-  return (
+  const [showFilters, setShowFilter] = React.useState(false)
+
+  const filterButtonHandler = React.useCallback(() => {
+    setShowFilter(!showFilters)
+  },[setShowFilter, showFilters])
+
+  React.useEffect(() => {
+    props.navigation.setParams({"filtersButton": filterButtonHandler,})
+  },[filterButtonHandler])
+    return (
       <View style={styles.screen}>
     <View style={styles.container}>
+      {showFilters && <Text>Filters</Text>}
       <Text> Baby Names</Text>
       <NameCard names={names}/>
     </View>
@@ -25,15 +36,18 @@ export default function Home(props :any) {
 }
 
 Home.navigationOptions = (navData: any) => {
+  // const setShowFilter = navData.navigation.getParam('filterButtonHandler')
+  // console.log(navData.navigation.getParam('filterButtonHandler'))
 	return {
 		headerTitle: "Home",
-		headerLeft: () => {
+		headerRight: () => {
 			return (
-				<HeaderButtons HeaderButtonComponent={Ionicons}>
+				<HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
 					<Item
 						title="Menu"
 						iconName={"ios-menu"}
 						onPress={() => {
+              navData.navigation.getParam("filtersButton")()
 						}}
 					/>
 				</HeaderButtons>
