@@ -15,8 +15,8 @@ import * as nameActions from '../store/actions/name'
 import { Name } from "../types";
 
 const NameCard = (props: any) => {
-	const { initialNames } = props;
-	const [names, setNames] = useState(initialNames)
+	const { names } = props;
+	// const [names, setNames] = useState(initialNames)
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState('boy'); // false === boy || true === girl
     const dispatch = useDispatch()
