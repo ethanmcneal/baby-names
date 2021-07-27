@@ -12,12 +12,12 @@ const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
   const names = useSelector((state :any) => state.names.names)
-
+console.log(names)
   return (
       <View style={styles.screen}>
     <View style={styles.container}>
       <Text> Baby Names</Text>
-      <NameCard initialNames={names}/>
+      <NameCard names={names}/>
     </View>
       </View>
   );

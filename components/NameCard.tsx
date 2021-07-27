@@ -10,13 +10,12 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
-import { Text, View } from "./Themed";
+import { View } from "./Themed";
 import * as nameActions from '../store/actions/name'
 import { Name } from "../types";
 
 const NameCard = (props: any) => {
 	const { names } = props;
-	// const [names, setNames] = useState(initialNames)
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState('boy'); // false === boy || true === girl
     const dispatch = useDispatch()
