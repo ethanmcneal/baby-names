@@ -5,12 +5,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useStore } from 'react-redux';
 import Names from '../assets/data.json'
+import Filters from '../components/Filters';
 import CustomHeaderButton from '../components/HeaderButtonComponent';
 import NameCard from '../components/NameCard';
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
-import useColorScheme from '../hooks/useColorScheme';
-import { NameState } from '../types';
 const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
@@ -27,7 +26,7 @@ export default function Home(props :any) {
     return (
       <View style={styles.screen}>
     <View style={styles.container}>
-      {showFilters && <Text>Filters</Text>}
+      {showFilters && <Filters />}
       <Text> Baby Names</Text>
       <NameCard names={names}/>
     </View>
@@ -36,8 +35,7 @@ export default function Home(props :any) {
 }
 
 Home.navigationOptions = (navData: any) => {
-  // const setShowFilter = navData.navigation.getParam('filterButtonHandler')
-  // console.log(navData.navigation.getParam('filterButtonHandler'))
+
 	return {
 		headerTitle: "Home",
 		headerRight: () => {
