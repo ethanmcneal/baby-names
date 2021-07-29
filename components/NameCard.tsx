@@ -28,7 +28,7 @@ const NameCard = (props: any) => {
             Animated.spring(position, {
                 toValue: { x: width + 100, y: gestureState.dy},
                 useNativeDriver: false,
-                speed: 15,
+                speed: 10,
             }
             ).start(() => {
                 dispatch(nameActions.likeName(names[index])),
@@ -40,7 +40,7 @@ const NameCard = (props: any) => {
             Animated.spring(position, {
                 toValue: { x: -width - 100, y: gestureState.dy}, 
                 useNativeDriver: false,
-                speed: 15,
+                speed: 10,
             }).start(() => {
                 dispatch(nameActions.dislikeName(names[index])),
                     () => {
