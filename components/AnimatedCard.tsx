@@ -60,7 +60,7 @@ const AnimatedCard = (props :any) => {
                         { ...styles.boyCard },
                     ]}
                 >
-                    <Text style={styles.name}>{babyName.name}</Text>
+                    <Text style={styles.name}>{babyName.name}{' '}{filters.middleName}{filters.lastName}</Text>
                 </Animated.View>
             );
         } else {
