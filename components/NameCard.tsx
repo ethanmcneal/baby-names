@@ -11,95 +11,111 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { View } from "./Themed";
-import * as nameActions from '../store/actions/name'
+import * as nameActions from "../store/actions/name";
 import { Name } from "../types";
 
 const NameCard = (props: any) => {
 	const { names } = props;
 	const [index, setIndex] = useState(0);
-	const [gender, setGender] = useState('boy'); // false === boy || true === girl
-    const dispatch = useDispatch()
+	const [gender, setGender] = useState("boy"); // false === boy || true === girl
+	const dispatch = useDispatch();
 
 	const { width, height } = Dimensions.get("window");
-	let position :any = new Animated.ValueXY();
-    const onRelease = (evt :any, gestureState :any) => {
-        
-        if (gestureState.dx > 120) {
-            Animated.spring(position, {
-                toValue: { x: width + 100, y: gestureState.dy},
-                useNativeDriver: false,
-                speed: 10,
-            }
-            ).start(() => {
-                dispatch(nameActions.likeName(names[index])),
-                    () => {
-                        position.setValue({ x: 0, y: 0});
-                    };
-            });
-        } else if (gestureState.dx < -120) {
-            Animated.spring(position, {
-                toValue: { x: -width - 100, y: gestureState.dy}, 
-                useNativeDriver: false,
-                speed: 10,
-            }).start(() => {
-                dispatch(nameActions.dislikeName(names[index])),
-                    () => {
-                        position.setValue({ x: 0, y: 0});
-                    };
-            });
-        } else {
-            Animated.spring(position, {
-               toValue: { x: 0, y: 0},
-               useNativeDriver: false,
-               bounciness: 2,
-               }).start(() => {
-                   position.setValue({x: 0, y: 0})
-               })
-            }
-        }
+	let position: any = new Animated.ValueXY();
+	const onRelease = (evt: any, gestureState: any) => {
+		if (gestureState.dx > 120) {
+			Animated.spring(position, {
+				toValue: { x: width + 100, y: gestureState.dy },
+				useNativeDriver: false,
+				speed: 10,
+			}).start(() => {
+				dispatch(
+					nameActions.likeName(
+						gender === "girl"
+							? names.girlNames[index]
+							: names.boyNames[index],
+					),
+				),
+				setIndex(prev => prev + 1),
+					() => {
+						position.setValue({ x: 0, y: 0 });
+					};
+			});
+		} else if (gestureState.dx < -120) {
+			Animated.spring(position, {
+				toValue: { x: -width - 100, y: gestureState.dy },
+				useNativeDriver: false,
+				speed: 10,
+			}).start(() => {
+				dispatch(
+					nameActions.dislikeName(
+						gender === "girl"
+							? names.girlNames[index]
+							: names.boyNames[index],
+					),
+				),
+				setIndex(prev => prev + 1),
+					() => {
+						position.setValue({ x: 0, y: 0 });
+					};
+			});
+		} else {
+			Animated.spring(position, {
+				toValue: { x: 0, y: 0 },
+				useNativeDriver: false,
+				bounciness: 2,
+			}).start(() => {
+				position.setValue({ x: 0, y: 0 });
+			});
+		}
+	};
 
 	const panResponder = PanResponder.create({
 		onStartShouldSetPanResponder: (evt, gesState) => true,
 		onPanResponderMove: (evt, gesState) => {
-			position.setValue({ x: gesState.dx, y: gesState.dy});
+			position.setValue({ x: gesState.dx, y: gesState.dy });
 		},
 		onPanResponderRelease: onRelease,
 	});
 
-    const handleLike = (dx :number) => {
-        onRelease(null, {dx: dx, dy:10})
-        
-    }
+	const handleLike = (dx: number) => {
+		onRelease(null, { dx: dx, dy: 10 });
+	};
 
-    const handleGenderButton = (genderChange :string) => {
-       	setGender(genderChange)
-        setIndex(genderChange === 'girl' ? 100 : 0)
-    }
+	const handleGenderButton = (genderChange: string) => {
+		let nextIndex =
+			gender === "girl"
+				? names.girlNames[0].id - 1
+				: names.boyNames[0].id - 1;
+
+		setGender(genderChange);
+		setIndex(nextIndex);
+	};
 	return (
 		<View style={styles.container}>
 			<View style={styles.buttonContainer}>
 				<TouchableOpacity
 					style={
-						gender === 'boy'
+						gender === "boy"
 							? styles.genderButtonPressed
 							: styles.genderButton
 					}
-					onPress={() => handleGenderButton('boy')}
+					onPress={() => handleGenderButton("boy")}
 				>
 					<Ionicons name={"male-outline"} size={40} color="blue" />
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={
-						gender === 'girl'
+						gender === "girl"
 							? styles.genderButtonPressed
 							: styles.genderButton
 					}
-					onPress={() => handleGenderButton('girl')}
+					onPress={() => handleGenderButton("girl")}
 				>
 					<Ionicons name={"female-outline"} size={40} color="pink" />
 				</TouchableOpacity>
 			</View>
-			
+
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
 					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
@@ -110,9 +126,7 @@ const NameCard = (props: any) => {
 						color="red"
 					/>
 				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={() => handleLike(121)}
-				>
+				<TouchableOpacity onPress={() => handleLike(121)}>
 					<Ionicons
 						name={"heart-circle-outline"}
 						size={45}
@@ -120,13 +134,16 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-            <AnimatedCard names={names} index={index}
-             panResponder={panResponder} position={position} gender={gender}/>
+			<AnimatedCard
+				names={gender === "girl" ? names.girlNames : names.boyNames}
+				index={index}
+				panResponder={panResponder}
+				position={position}
+				gender={gender}
+			/>
 		</View>
 	);
 };
-
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -134,17 +151,17 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-	
+
 	buttonContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
 		width: "80%",
 	},
-    likeButtonContainer: {
+	likeButtonContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		width: "80%", 
-        top: '120%'
+		width: "80%",
+		top: "120%",
 	},
 	genderButton: {
 		padding: 5,

@@ -18,7 +18,7 @@ export default (state: NameState = initialState, action: any) => {
 			}
 			return {
 				...state,
-				names: genderToFilter.filter(name => name.id != action.name.id),
+				// names: genderToFilter.filter(name => name.id != action.name.id),
 				likedNames: state.likedNames.concat(action.name),
 			};
 		case DISLIKE_NAME:
@@ -29,7 +29,7 @@ export default (state: NameState = initialState, action: any) => {
 			}
 			return {
 				...state,
-				names: genderToFilter.filter(name => name.id != action.name.id),
+				// names: genderToFilter.filter(name => name.id != action.name.id),
 				dislikedNames: state.likedNames.concat(action.name),
 			};
 		default:
