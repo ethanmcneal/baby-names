@@ -13,7 +13,7 @@ import Colors from '../constants/Colors';
 const colorScheme = Appearance.getColorScheme()
 
 export default function Home(props :any) {
-  const names = useSelector((state :any) => state.names.names)
+  
   const [showFilters, setShowFilter] = React.useState(false)
 
   const filterButtonHandler = React.useCallback(() => {
@@ -28,7 +28,7 @@ export default function Home(props :any) {
     <View style={styles.container}>
       {showFilters && <Filters setShowFilter={setShowFilter}/>}
       <Text> Baby Names</Text>
-      <NameCard names={names}/>
+      <NameCard />
     </View>
       </View>
   );

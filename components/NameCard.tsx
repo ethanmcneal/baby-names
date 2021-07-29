@@ -15,10 +15,11 @@ import * as nameActions from "../store/actions/name";
 import { Name } from "../types";
 
 const NameCard = (props: any) => {
-	const { names } = props;
+	const names = useSelector((state :any) => state.names.names)
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState("boy"); // false === boy || true === girl
 	const dispatch = useDispatch();
+
 
 	const { width, height } = Dimensions.get("window");
 	let position: any = new Animated.ValueXY();
@@ -84,8 +85,8 @@ const NameCard = (props: any) => {
 
 	const handleGenderButton = (genderChange: string) => {
 		let nextIndex =
-			gender === "girl"
-				? names.girlNames[0].id - 1
+			genderChange === "girl"
+				? names.girlNames[0].id - 100
 				: names.boyNames[0].id - 1;
 
 		setGender(genderChange);
@@ -134,13 +135,20 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-			<AnimatedCard
-				names={gender === "girl" ? names.girlNames : names.boyNames}
+			{ gender == 'girl' ? <AnimatedCard
+				names={names.girlNames}
 				index={index}
 				panResponder={panResponder}
 				position={position}
 				gender={gender}
-			/>
+			/> : 
+			<AnimatedCard
+				names={names.boyNames}
+				index={index}
+				panResponder={panResponder}
+				position={position}
+				gender={gender}
+			/>}
 		</View>
 	);
 };

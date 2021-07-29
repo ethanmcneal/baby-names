@@ -98,10 +98,10 @@
 		{ "id": 96, "name": "Adam", "gender": "boy" },
 		{ "id": 97, "name": "Jace", "gender": "boy" },
 		{ "id": 98, "name": "Wesley", "gender": "boy" },
-		{ "id": 99, "name": "Kayden", "gender": "boy" }
+		{ "id": 99, "name": "Kayden", "gender": "boy" },
+		{ "id": 100, "name": "Silas", "gender": "boy" }
 	],
 	"girlNames": [
-		{ "id": 100, "name": "Silas", "gender": "boy" },
 		{ "id": 101, "name": "Olivia", "gender": "girl" },
 		{ "id": 102, "name": "Emma", "gender": "girl" },
 		{ "id": 103, "name": "Ava", "gender": "girl" },
