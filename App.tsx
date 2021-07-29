@@ -7,13 +7,15 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import AppNavigator from './navigation/AppNavigator';
 import namesReducer from './store/reducers/name'
+import filtersReducer from './store/reducers/filters'
 import { enableScreens } from 'react-native-screens';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 
 const DefaultRootState = combineReducers({
-  names: namesReducer
+  names: namesReducer,
+  filters: filtersReducer,
 })
 
 const store = createStore(DefaultRootState)

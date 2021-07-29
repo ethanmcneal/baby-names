@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { TextInput } from "react-native";
+import { Button, StyleSheet, TextInput } from "react-native";
+import { useSelector } from "react-redux";
 import { Text, View } from "./Themed";
 
 const Filters = (props: any) => {
-	const [lastName, setLastName] = useState("");
-	const [middleName, setMiddleName] = useState("");
+    const filters = useSelector((state :any) => state.filters.filters)
+	const [lastName, setLastName] = useState(filters ? filters.lastName : "");
+	const [middleName, setMiddleName] = useState(filters ? filters.middleName : "");
+    
 
 	return (
 		<View>
@@ -23,8 +26,20 @@ const Filters = (props: any) => {
 					onChangeText={(text) => setMiddleName(text)}
 				/>
 			</View>
+            <View style={styles.buttonContainer}>
+                <Button title='Save' onPress={() => {}}/>
+                <Button title='Clear' onPress={() => {}}/>
+
+            </View>
 		</View>
 	);
 };
 
+
+const styles = StyleSheet.create({
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+})
 export default Filters;
