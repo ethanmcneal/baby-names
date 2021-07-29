@@ -30,7 +30,7 @@ export type Name = {
 }
 
 export type NameState = {
-  names: Array<Name>,
+  names: {boyNames: Array<Name>, girlNames: Array<Name>},
   likedNames: Array<Name>,
   dislikedNames: Array<Name>,
 }

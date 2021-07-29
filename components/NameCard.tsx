@@ -67,7 +67,7 @@ const NameCard = (props: any) => {
 	});
 
     const handleLike = (dx :number) => {
-        onRelease(null, {dx: dx, dy:0})
+        onRelease(null, {dx: dx, dy:10})
         
     }
 
