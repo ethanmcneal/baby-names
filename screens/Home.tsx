@@ -26,7 +26,7 @@ export default function Home(props :any) {
     return (
       <View style={styles.screen}>
     <View style={styles.container}>
-      {showFilters && <Filters />}
+      {showFilters && <Filters setShowFilter={setShowFilter}/>}
       <Text> Baby Names</Text>
       <NameCard names={names}/>
     </View>

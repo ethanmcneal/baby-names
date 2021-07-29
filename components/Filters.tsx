@@ -6,12 +6,23 @@ import * as filterActions from "../store/actions/filters";
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
-	const [lastName, setLastName] = useState(filters ? filters.lastName : "");
+	const [lastName, setLastName] = useState(
+        filters ? filters.lastName : ""
+    );
 	const [middleName, setMiddleName] = useState(
 		filters ? filters.middleName : "",
 	);
 	const dispatch = useDispatch();
 
+	const saveFilters = () => {
+		dispatch(
+			filterActions.createFilter({
+				lastName: lastName,
+				middleName: middleName,
+			}),
+		);
+		props.setShowFilter(false);
+	};
 	return (
 		<View style={styles.container}>
 			<Text>Filters</Text>
@@ -30,17 +41,7 @@ const Filters = (props: any) => {
 				/>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Button
-					title="Save"
-					onPress={() => {
-						dispatch(
-							filterActions.createFilter({
-								lastName: lastName,
-								middleName: middleName,
-							}),
-						);
-					}}
-				/>
+				<Button title="Save" onPress={() => saveFilters()} />
 				<Button title="Clear" onPress={() => {}} />
 			</View>
 		</View>
