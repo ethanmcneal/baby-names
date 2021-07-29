@@ -35,7 +35,7 @@ export type NameState = {
   dislikedNames: Array<Name>,
 }
 
-export type Filter = {
+export type Filters = {
 lastName: String,
 middleName: String,
 }
