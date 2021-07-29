@@ -5,6 +5,7 @@ import {
 	Dimensions,
 	StyleSheet,
 } from "react-native";
+import { useSelector } from "react-redux";
 import { Name } from "../types";
 import { Text, View } from "./Themed";
 
@@ -14,6 +15,7 @@ const { width, height } = Dimensions.get("window");
 
 const AnimatedCard = (props :any) => {
     
+    const filters = useSelector((state :any) => state.filters.filters)
     const {names, index, panResponder, position, gender} = props
 
     let rotate = position.x.interpolate({
@@ -73,7 +75,7 @@ const AnimatedCard = (props :any) => {
                         gender === 'girl' ? styles.girlCard : styles.boyCard,
                     ]}
                 >
-                    <Text style={styles.name}>{babyName.name}</Text>
+                    <Text style={styles.name}>{babyName.name}{' '}{filters.middleName}{'  '}{filters.lastName}</Text>
                 </Animated.View>
             );
         }
