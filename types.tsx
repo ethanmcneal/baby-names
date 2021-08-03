@@ -33,6 +33,7 @@ export type NameState = {
   names: {boyNames: Array<Name>, girlNames: Array<Name>},
   likedNames: Array<Name>,
   dislikedNames: Array<Name>,
+  lastInteractedId: {boy:number,girl:number} 
 }
 
 export type Filters = {
