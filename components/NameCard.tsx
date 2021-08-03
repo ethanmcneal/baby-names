@@ -16,6 +16,7 @@ import { Name } from "../types";
 
 const NameCard = (props: any) => {
 	const names = useSelector((state :any) => state.names.names)
+	const nextID = useSelector((state :any) => state.names.lastInteractedId)
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState("boy"); // false === boy || true === girl
 	const dispatch = useDispatch();
@@ -84,13 +85,10 @@ const NameCard = (props: any) => {
 	};
 
 	const handleGenderButton = (genderChange: string) => {
-		let nextIndex =
 			genderChange === "girl"
-				? names.girlNames[0].id - 100
-				: names.boyNames[0].id - 1;
-
+				? setIndex(nextID.girl -100)
+				: setIndex(nextID.boy);
 		setGender(genderChange);
-		setIndex(nextIndex);
 	};
 	return (
 		<View style={styles.container}>
