@@ -85,9 +85,9 @@ const NameCard = (props: any) => {
 	};
 
 	const handleGenderButton = (genderChange: string) => {
-			genderChange === "girl"
-				? setIndex(nextID.girl -100)
-				: setIndex(nextID.boy);
+		genderChange === "girl"
+		? setIndex(nextID.girl - 100)
+		: setIndex(nextID.boy);
 		setGender(genderChange);
 	};
 	return (

@@ -39,8 +39,8 @@ const AnimatedCard = (props: any) => {
 	};
 	return (
 		<>
-        <Animated.View
-            				style={[
+			{nextName &&<Animated.View
+				style={[
 					{
 						opacity: nextCardOpacity,
 						transform: [{ scale: nextCardScale }],
@@ -53,8 +53,8 @@ const AnimatedCard = (props: any) => {
 					{filters.middleName && " "}
 					{filters.lastName}
 				</Text>
-			</Animated.View>
-			<Animated.View
+			</Animated.View> }
+			{name && <Animated.View
 				{...panResponder.panHandlers}
 				// key={babyName.id}
 				style={
@@ -68,10 +68,10 @@ const AnimatedCard = (props: any) => {
 					{filters.middleName && " "}
 					{filters.lastName}
 				</Text>
-			</Animated.View>
-			
+			</Animated.View>}
 		</>
-    )}
+	);
+};
 
 const card: any = {
 	height: 300,
