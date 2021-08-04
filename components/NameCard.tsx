@@ -26,7 +26,10 @@ const NameCard = (props: any) => {
 						: names.boyNames[index],
 				),
 			)
-		}, 100);
+		}, 90); //timeout set so the animation will play before the index is incremented, that way the card doesn't
+				// vanish instantly
+				//I want the timeout to be quick enough for users to spam the like button
+				//but slow enough so they can't get duplicates in likedNames
 	};
 
 	let position: any = new Animated.ValueXY();
@@ -82,7 +85,7 @@ const NameCard = (props: any) => {
 				setGender={setGender}
 				nextID={nextID}
 			/>}
-			<LikeButtons onRelease={onRelease} />
+			<LikeButtons onRelease={onRelease}/>
 			{gender == "girl" ? (
 				<AnimatedCard
 					names={names.girlNames}

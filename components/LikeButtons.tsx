@@ -30,7 +30,8 @@ const LikeButtons = (props :any) => {
 				</TouchableOpacity>
 				<TouchableOpacity 
                 style={styles.button}
-                onPress={() => handleLike(121)}>
+                onPress={() => handleLike(121)}
+                >
 					<Ionicons
 						name={"heart"}
 						size={55}
