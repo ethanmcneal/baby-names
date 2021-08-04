@@ -16,4 +16,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
   },
+  universal: {
+    pink: "#F7B7E9",
+    blue: '#539BF5',
+  }
 };

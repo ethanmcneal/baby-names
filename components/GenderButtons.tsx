@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { View } from "./Themed";
+import Colors from '../constants/Colors';
 
 const GenderButtons = (props :any) => {
 
@@ -26,7 +27,7 @@ const GenderButtons = (props :any) => {
 					}
 					onPress={() => handleGenderButton("boy")}
 				>
-					<Ionicons name={"male-outline"} size={40} color="blue" />
+					<Ionicons name={"male-outline"} size={40} color={Colors.universal.blue} />
 				</TouchableOpacity>
 				<TouchableOpacity
 					style={
@@ -36,7 +37,7 @@ const GenderButtons = (props :any) => {
 					}
 					onPress={() => handleGenderButton("girl")}
 				>
-					<Ionicons name={"female-outline"} size={40} color="pink" />
+					<Ionicons name={"female-outline"} size={40} color={Colors.universal.pink} />
 				</TouchableOpacity>
 			</View>
     )
@@ -52,9 +53,9 @@ const styles = StyleSheet.create({
 	},
     genderButton: {
 		padding: 5,
-		borderWidth: 1,
+		borderWidth: .5,
 		borderColor: "#ccc",
-		backgroundColor: "#eee",
+		backgroundColor: "#3A3A3A",
 		shadowOpacity: 0.4,
 		shadowColor: "#222",
 		shadowOffset: { height: 0, width: 0.1 },
@@ -62,10 +63,10 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 	},
 	genderButtonPressed: {
-		padding: 5,
+		padding: 7,
 		borderWidth: 2,
 		borderColor: "#ccc",
-		backgroundColor: "#bfbfbf",
+		backgroundColor: "#333",
 		borderRadius: 8,
 		marginBottom: 10,
 	},

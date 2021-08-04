@@ -1,6 +1,7 @@
 import React from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
+import Colors from "../constants/Colors";
 import { Text } from "./Themed";
 
 const { width, height } = Dimensions.get("window");
@@ -82,17 +83,17 @@ const card: any = {
 	width: "100%",
 	position: "absolute",
 	top: "70%",
-	borderRadius: 12,
+	borderRadius: 8,
 };
 
 const styles = StyleSheet.create({
 	boyCard: {
 		...card,
-		backgroundColor: "#05BCEE",
+		backgroundColor: Colors.universal.blue,
 	},
 	girlCard: {
 		...card,
-		backgroundColor: "pink",
+		backgroundColor: Colors.universal.pink,
 	},
 	name: {
 		fontSize: 22,

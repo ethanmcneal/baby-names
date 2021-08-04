@@ -22,7 +22,7 @@ const navigationOptions = {
     }, 
     headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
 }
-const ComponentNavigator = createStackNavigator({
+const LikedNamesNavigator = createStackNavigator({
     "Liked Names": LikedNamesScreen
 },  {
     defaultNavigationOptions: navigationOptions
@@ -36,7 +36,7 @@ const HomeNavigator = createStackNavigator({
 
 const MainNavigator = createBottomTabNavigator({
     Home: HomeNavigator,
-    Components: ComponentNavigator
+    "Your Names": LikedNamesNavigator
 },
 
 {
@@ -50,8 +50,8 @@ const MainNavigator = createBottomTabNavigator({
           iconName = focused
             ? 'ios-information-circle'
             : 'ios-information-circle-outline';
-        } else if (routeName === 'Components') {
-          iconName = focused ? 'ios-list-circle' : 'ios-list-circle-outline'; 
+        } else if (routeName === 'Your Names') {
+          iconName = focused ? 'ios-heart' : 'ios-heart-outline'; 
         }
 
         // You can return any component that you like here!

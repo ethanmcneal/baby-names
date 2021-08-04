@@ -41,8 +41,8 @@ const Filters = (props: any) => {
 				/>
 			</View>
 			<View style={styles.buttonContainer}>
-				<Button title="Save" onPress={() => saveFilters()} />
 				<Button title="Clear" onPress={() => {}} />
+				<Button title="Save" onPress={() => saveFilters()} />
 			</View>
 		</View>
 	);
