@@ -23,7 +23,7 @@ export default function Home(props :any) {
       <View style={styles.screen}>
     <View style={styles.container}>
       {showFilters && <Filters setShowFilter={setShowFilter}/>}
-      <NameCard />
+      <NameCard showFilters={showFilters}/>
     </View>
       </View>
   );

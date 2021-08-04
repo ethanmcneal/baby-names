@@ -73,12 +73,12 @@ const NameCard = (props: any) => {
 
 	return (
 		<View style={styles.container}>
-			<GenderButtons
+			{props.showFilters && <GenderButtons
 				gender={gender}
 				setIndex={setIndex}
 				setGender={setGender}
 				nextID={nextID}
-			/>
+			/>}
 			<LikeButtons onRelease={onRelease} />
 			{gender == "girl" ? (
 				<AnimatedCard

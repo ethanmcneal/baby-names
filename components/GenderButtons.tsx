@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		justifyContent: "space-between",
 		width: "80%",
+        borderBottomWidth: 1,
+        borderBottomColor: 'white'
 	},
     genderButton: {
 		padding: 5,
