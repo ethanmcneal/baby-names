@@ -1,18 +1,14 @@
-import { Ionicons } from "@expo/vector-icons";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
 	Animated,
-	Button,
 	Dimensions,
 	PanResponder,
 	StyleSheet,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { View } from "./Themed";
 import * as nameActions from "../store/actions/name";
-import { Name } from "../types";
 import GenderButtons from "./GenderButtons";
 import LikeButtons from "./LikeButtons";
 
@@ -113,12 +109,6 @@ const styles = StyleSheet.create({
 		width: "75%",
 		alignItems: "center",
 		justifyContent: "center",
-	},
-	likeButtonContainer: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		width: "80%",
-		top: "120%",
 	},
 });
 

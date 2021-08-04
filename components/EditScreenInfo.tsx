@@ -1,6 +1,6 @@
 import * as WebBrowser from "expo-web-browser";
 import React from "react";
-import { Button, StyleSheet, TouchableOpacity } from "react-native";
+import { Button, StyleSheet } from "react-native";
 import { Text, View } from "./Themed";
 
 export default function EditScreenInfo() {

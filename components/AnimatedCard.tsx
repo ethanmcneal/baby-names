@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { Name } from "../types";
-import { Text, View } from "./Themed";
+import { Text} from "./Themed";
 
 const { width, height } = Dimensions.get("window");
 

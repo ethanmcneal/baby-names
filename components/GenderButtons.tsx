@@ -1,18 +1,10 @@
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import {
-	Animated,
-	Button,
-	Dimensions,
-	PanResponder,
 	StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useDispatch, useSelector } from "react-redux";
-import AnimatedCard from "./AnimatedCard";
 import { View } from "./Themed";
-import * as nameActions from "../store/actions/name";
-import { Name } from "../types";
 
 const GenderButtons = (props :any) => {
 

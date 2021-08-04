@@ -1,10 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { Appearance, Button, StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Appearance, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useSelector, useStore } from 'react-redux';
-import Names from '../assets/data.json'
 import Filters from '../components/Filters';
 import CustomHeaderButton from '../components/HeaderButtonComponent';
 import NameCard from '../components/NameCard';
