@@ -17,36 +17,39 @@ const NameCard = (props: any) => {
 	const { width, height } = Dimensions.get("window");
 
 	const handleSwipe = (action: any) => {
-		dispatch(
-			action(
-				gender === "girl"
-					? names.girlNames[index]
-					: names.boyNames[index],
-			),
-		);
+		setTimeout(() => {
+			setIndex(prev => prev + 1),
+			dispatch(
+				action(
+					gender === "girl"
+						? names.girlNames[index]
+						: names.boyNames[index],
+				),
+			)
+		}, 100);
 	};
 
 	let position: any = new Animated.ValueXY();
 	const onRelease = (evt: any, gestureState: any) => {
 		if (gestureState.dx > 120) {
-			setIndex((prev) => prev + 1),
-				handleSwipe(nameActions.likeName),
+			handleSwipe(nameActions.likeName),
+
 				Animated.spring(position, {
 					toValue: { x: width + 100, y: gestureState.dy },
 					useNativeDriver: false,
-					speed: 5,
+					bounciness: 15
 				}).start(() => {
+
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
 				});
 		} else if (gestureState.dx < -120) {
-			setIndex((prev) => prev + 1),
 				handleSwipe(nameActions.dislikeName),
 				Animated.spring(position, {
-					toValue: { x: -width - 100, y: gestureState.dy },
+					toValue: { x: -width - 300, y: gestureState.dy },
 					useNativeDriver: false,
-					speed: 5,
+					bounciness: 15
 				}).start(() => {
 					() => {
 						position.setValue({ x: 0, y: 0 });
