@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
 	Animated,
 	Button,
@@ -23,40 +23,39 @@ const NameCard = (props: any) => {
 
 
 	const { width, height } = Dimensions.get("window");
+
+	const handleSwipe = (action :any) => {
+		dispatch(
+			action(
+				gender === "girl"
+					? names.girlNames[index]
+					: names.boyNames[index],
+			)
+		)
+	}
+
 	let position: any = new Animated.ValueXY();
 	const onRelease = (evt: any, gestureState: any) => {
 		if (gestureState.dx > 120) {
 			setIndex(prev => prev + 1),
+			handleSwipe(nameActions.likeName),
 			Animated.spring(position, {
 				toValue: { x: width + 100, y: gestureState.dy },
 				useNativeDriver: false,
 				speed: 10,
 			}).start(() => {
-				dispatch(
-					nameActions.likeName(
-						gender === "girl"
-							? names.girlNames[index]
-							: names.boyNames[index],
-					),
-				),
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
 			});
 		} else if (gestureState.dx < -120) {
 			setIndex(prev => prev + 1),
+			handleSwipe(nameActions.dislikeName),
 			Animated.spring(position, {
 				toValue: { x: -width - 100, y: gestureState.dy },
 				useNativeDriver: false,
 				speed: 10,
 			}).start(() => {
-				dispatch(
-					nameActions.dislikeName(
-						gender === "girl"
-							? names.girlNames[index]
-							: names.boyNames[index],
-					),
-				),
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
