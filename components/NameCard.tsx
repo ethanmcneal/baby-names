@@ -13,53 +13,53 @@ import AnimatedCard from "./AnimatedCard";
 import { View } from "./Themed";
 import * as nameActions from "../store/actions/name";
 import { Name } from "../types";
+import GenderButtons from "./GenderButtons";
 
 const NameCard = (props: any) => {
-	const names = useSelector((state :any) => state.names.names)
-	const nextID = useSelector((state :any) => state.names.lastInteractedId)
+	const names = useSelector((state: any) => state.names.names);
+	const nextID = useSelector((state: any) => state.names.lastInteractedId);
 	const [index, setIndex] = useState(0);
 	const [gender, setGender] = useState("boy"); // false === boy || true === girl
 	const dispatch = useDispatch();
 
-
 	const { width, height } = Dimensions.get("window");
 
-	const handleSwipe = (action :any) => {
+	const handleSwipe = (action: any) => {
 		dispatch(
 			action(
 				gender === "girl"
 					? names.girlNames[index]
 					: names.boyNames[index],
-			)
-		)
-	}
+			),
+		);
+	};
 
 	let position: any = new Animated.ValueXY();
 	const onRelease = (evt: any, gestureState: any) => {
 		if (gestureState.dx > 120) {
-			setIndex(prev => prev + 1),
-			handleSwipe(nameActions.likeName),
-			Animated.spring(position, {
-				toValue: { x: width + 100, y: gestureState.dy },
-				useNativeDriver: false,
-				speed: 10,
-			}).start(() => {
+			setIndex((prev) => prev + 1),
+				handleSwipe(nameActions.likeName),
+				Animated.spring(position, {
+					toValue: { x: width + 100, y: gestureState.dy },
+					useNativeDriver: false,
+					speed: 10,
+				}).start(() => {
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
-			});
+				});
 		} else if (gestureState.dx < -120) {
-			setIndex(prev => prev + 1),
-			handleSwipe(nameActions.dislikeName),
-			Animated.spring(position, {
-				toValue: { x: -width - 100, y: gestureState.dy },
-				useNativeDriver: false,
-				speed: 10,
-			}).start(() => {
+			setIndex((prev) => prev + 1),
+				handleSwipe(nameActions.dislikeName),
+				Animated.spring(position, {
+					toValue: { x: -width - 100, y: gestureState.dy },
+					useNativeDriver: false,
+					speed: 10,
+				}).start(() => {
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
-			});
+				});
 		} else {
 			Animated.spring(position, {
 				toValue: { x: 0, y: 0 },
@@ -83,37 +83,11 @@ const NameCard = (props: any) => {
 		onRelease(null, { dx: dx, dy: 10 });
 	};
 
-	const handleGenderButton = (genderChange: string) => {
-		genderChange === "girl"
-		? setIndex(nextID.girl - 100)
-		: setIndex(nextID.boy);
-		setGender(genderChange);
-	};
+
 	return (
 		<View style={styles.container}>
-			<View style={styles.buttonContainer}>
-				<TouchableOpacity
-					style={
-						gender === "boy"
-							? styles.genderButtonPressed
-							: styles.genderButton
-					}
-					onPress={() => handleGenderButton("boy")}
-				>
-					<Ionicons name={"male-outline"} size={40} color="blue" />
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={
-						gender === "girl"
-							? styles.genderButtonPressed
-							: styles.genderButton
-					}
-					onPress={() => handleGenderButton("girl")}
-				>
-					<Ionicons name={"female-outline"} size={40} color="pink" />
-				</TouchableOpacity>
-			</View>
-
+			
+		<GenderButtons />
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
 					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
@@ -132,20 +106,23 @@ const NameCard = (props: any) => {
 					/>
 				</TouchableOpacity>
 			</View>
-			{ gender == 'girl' ? <AnimatedCard
-				names={names.girlNames}
-				index={index}
-				panResponder={panResponder}
-				position={position}
-				gender={gender}
-			/> : 
-			<AnimatedCard
-				names={names.boyNames}
-				index={index}
-				panResponder={panResponder}
-				position={position}
-				gender={gender}
-			/>}
+			{gender == "girl" ? (
+				<AnimatedCard
+					names={names.girlNames}
+					index={index}
+					panResponder={panResponder}
+					position={position}
+					gender={gender}
+				/>
+			) : (
+				<AnimatedCard
+					names={names.boyNames}
+					index={index}
+					panResponder={panResponder}
+					position={position}
+					gender={gender}
+				/>
+			)}
 		</View>
 	);
 };
