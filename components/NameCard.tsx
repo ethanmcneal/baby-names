@@ -87,24 +87,7 @@ const NameCard = (props: any) => {
 	return (
 		<View style={styles.container}>
 		<GenderButtons gender={gender} setIndex={setIndex} setGender={setGender} nextID={nextID}/>
-			<View style={styles.likeButtonContainer}>
-				<TouchableOpacity
-					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
-				>
-					<Ionicons
-						name={"heart-dislike-circle-outline"}
-						size={45}
-						color="red"
-					/>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => handleLike(121)}>
-					<Ionicons
-						name={"heart-circle-outline"}
-						size={45}
-						color="green"
-					/>
-				</TouchableOpacity>
-			</View>
+			
 			{gender == "girl" ? (
 				<AnimatedCard
 					names={names.girlNames}
