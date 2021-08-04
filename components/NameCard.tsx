@@ -34,7 +34,7 @@ const NameCard = (props: any) => {
 				Animated.spring(position, {
 					toValue: { x: width + 100, y: gestureState.dy },
 					useNativeDriver: false,
-					speed: 10,
+					speed: 5,
 				}).start(() => {
 					() => {
 						position.setValue({ x: 0, y: 0 });
@@ -46,7 +46,7 @@ const NameCard = (props: any) => {
 				Animated.spring(position, {
 					toValue: { x: -width - 100, y: gestureState.dy },
 					useNativeDriver: false,
-					speed: 10,
+					speed: 5,
 				}).start(() => {
 					() => {
 						position.setValue({ x: 0, y: 0 });

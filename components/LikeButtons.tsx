@@ -10,7 +10,7 @@ const LikeButtons = (props :any) => {
     const {onRelease} = props
 
     const handleLike = (dx: number) => {
-		onRelease(null, { dx: dx, dy: 10 });
+		onRelease(null, { dx: dx, dy: 0 });
 	};
     return(
         <View style={styles.likeButtonContainer}>
@@ -18,16 +18,16 @@ const LikeButtons = (props :any) => {
 					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
 				>
 					<Ionicons
-						name={"heart-dislike-circle-outline"}
-						size={45}
-						color="red"
+						name={"heart-dislike"}
+						size={55}
+						color="#FF0000"
 					/>
 				</TouchableOpacity>
 				<TouchableOpacity onPress={() => handleLike(121)}>
 					<Ionicons
-						name={"heart-circle-outline"}
-						size={45}
-						color="green"
+						name={"heart"}
+						size={55}
+						color="#acf1af"
 					/>
 				</TouchableOpacity>
 			</View>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     likeButtonContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		width: "80%",
+		width: "90%",
 		top: "120%",
        
 	},

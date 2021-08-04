@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import { Button, StyleSheet, TextInput, useColorScheme } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, View } from "./Themed";
 import * as filterActions from "../store/actions/filters";
+import Colors from "../constants/Colors";
+
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
@@ -23,11 +25,20 @@ const Filters = (props: any) => {
 		);
 		props.setShowFilter(false);
 	};
+
+	const colorScheme = useColorScheme()
+
+
+	const inputText = {
+		color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,
+		fontSize: 22,
+	}
 	return (
 		<View style={styles.container}>
-			<Text>Filters</Text>
+			<Text style={styles.headerText}>Filters</Text>
 			<View style={styles.inputContainer}>
 				<TextInput
+				style={inputText}
 					value={lastName}
 					placeholder="Last Name(optional)"
 					onChangeText={(text) => setLastName(text)}
@@ -35,6 +46,7 @@ const Filters = (props: any) => {
 			</View>
 			<View style={styles.inputContainer}>
 				<TextInput
+					style={inputText}
 					value={middleName}
 					placeholder="Middle Name(optional)"
 					onChangeText={(text) => setMiddleName(text)}
@@ -54,8 +66,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
+	headerText: {
+		fontSize: 18,
+	},
 	inputContainer: {
-		width: "50%",
+		width: "70%",
 		borderBottomColor: "#ccc",
 		borderBottomWidth: 1,
 		marginVertical: 5,
