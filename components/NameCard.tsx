@@ -86,8 +86,7 @@ const NameCard = (props: any) => {
 
 	return (
 		<View style={styles.container}>
-			
-		<GenderButtons />
+		<GenderButtons gender={gender} setIndex={setIndex} setGender={setGender} nextID={nextID}/>
 			<View style={styles.likeButtonContainer}>
 				<TouchableOpacity
 					onPress={() => handleLike(-121)} // pass num > 120 for like || num < -120 for dislike
@@ -133,36 +132,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 	},
-
-	buttonContainer: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		width: "80%",
-	},
 	likeButtonContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",
 		width: "80%",
 		top: "120%",
-	},
-	genderButton: {
-		padding: 5,
-		borderWidth: 1,
-		borderColor: "#ccc",
-		backgroundColor: "#eee",
-		shadowOpacity: 0.4,
-		shadowColor: "#222",
-		shadowOffset: { height: 0, width: 0.1 },
-		borderRadius: 8,
-		marginBottom: 10,
-	},
-	genderButtonPressed: {
-		padding: 5,
-		borderWidth: 2,
-		borderColor: "#ccc",
-		backgroundColor: "#bfbfbf",
-		borderRadius: 8,
-		marginBottom: 10,
 	},
 });
 
