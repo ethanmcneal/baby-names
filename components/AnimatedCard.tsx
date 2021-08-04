@@ -1,7 +1,7 @@
 import React from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import { Text} from "./Themed";
+import { Text } from "./Themed";
 
 const { width, height } = Dimensions.get("window");
 
@@ -38,36 +38,39 @@ const AnimatedCard = (props: any) => {
 	};
 	return (
 		<>
-			{nextName &&<Animated.View
-				style={[
-					{
-						opacity: nextCardOpacity,
-						transform: [{ scale: nextCardScale }],
-					},
-					gender === "girl" ? styles.girlCard : styles.boyCard,
-				]}
-			>
-				<Text style={styles.name}>
-					{nextName.name} {filters.middleName}
-					{filters.middleName && " "}
-					{filters.lastName}
-				</Text>
-			</Animated.View> }
-			{name && <Animated.View
-				{...panResponder.panHandlers}
-				// key={babyName.id}
-				style={
-					gender === "girl"
-						? [rotateAndTranslate, { ...styles.girlCard }]
-						: [rotateAndTranslate, { ...styles.boyCard }]
-				}
-			>
-				<Text style={styles.name}>
-					{name.name} {filters.middleName}
-					{filters.middleName && " "}
-					{filters.lastName}
-				</Text>
-			</Animated.View>}
+			{nextName && (
+				<Animated.View
+					style={[
+						{
+							opacity: nextCardOpacity,
+							transform: [{ scale: nextCardScale }],
+						},
+						gender === "girl" ? styles.girlCard : styles.boyCard,
+					]}
+				>
+					<Text style={styles.name}>
+						{nextName.name} {filters.middleName}
+						{filters.middleName && " "}
+						{filters.lastName}
+					</Text>
+				</Animated.View>
+			)}
+			{name && (
+				<Animated.View
+					{...panResponder.panHandlers}
+					style={
+						gender === "girl"
+							? [rotateAndTranslate, { ...styles.girlCard }]
+							: [rotateAndTranslate, { ...styles.boyCard }]
+					}
+				>
+					<Text style={styles.name}>
+						{name.name} {filters.middleName}
+						{filters.middleName && " "}
+						{filters.lastName}
+					</Text>
+				</Animated.View>
+			)}
 		</>
 	);
 };

@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-	Animated,
-	Dimensions,
-	PanResponder,
-	StyleSheet,
-} from "react-native";
+import { Animated, Dimensions, PanResponder, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
 import { View } from "./Themed";
@@ -76,13 +71,15 @@ const NameCard = (props: any) => {
 		onPanResponderRelease: onRelease,
 	});
 
-
-
-
 	return (
 		<View style={styles.container}>
-		<GenderButtons gender={gender} setIndex={setIndex} setGender={setGender} nextID={nextID}/>
-			<LikeButtons onRelease={onRelease}/>
+			<GenderButtons
+				gender={gender}
+				setIndex={setIndex}
+				setGender={setGender}
+				nextID={nextID}
+			/>
+			<LikeButtons onRelease={onRelease} />
 			{gender == "girl" ? (
 				<AnimatedCard
 					names={names.girlNames}
