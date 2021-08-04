@@ -26,6 +26,7 @@ const NameCard = (props: any) => {
 	let position: any = new Animated.ValueXY();
 	const onRelease = (evt: any, gestureState: any) => {
 		if (gestureState.dx > 120) {
+			setIndex(prev => prev + 1),
 			Animated.spring(position, {
 				toValue: { x: width + 100, y: gestureState.dy },
 				useNativeDriver: false,
@@ -38,12 +39,12 @@ const NameCard = (props: any) => {
 							: names.boyNames[index],
 					),
 				),
-				setIndex(prev => prev + 1),
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
 			});
 		} else if (gestureState.dx < -120) {
+			setIndex(prev => prev + 1),
 			Animated.spring(position, {
 				toValue: { x: -width - 100, y: gestureState.dy },
 				useNativeDriver: false,
@@ -56,7 +57,6 @@ const NameCard = (props: any) => {
 							: names.boyNames[index],
 					),
 				),
-				setIndex(prev => prev + 1),
 					() => {
 						position.setValue({ x: 0, y: 0 });
 					};
