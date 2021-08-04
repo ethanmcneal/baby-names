@@ -14,6 +14,7 @@ import { View } from "./Themed";
 import * as nameActions from "../store/actions/name";
 import { Name } from "../types";
 import GenderButtons from "./GenderButtons";
+import LikeButtons from "./LikeButtons";
 
 const NameCard = (props: any) => {
 	const names = useSelector((state: any) => state.names.names);
@@ -79,15 +80,13 @@ const NameCard = (props: any) => {
 		onPanResponderRelease: onRelease,
 	});
 
-	const handleLike = (dx: number) => {
-		onRelease(null, { dx: dx, dy: 10 });
-	};
+
 
 
 	return (
 		<View style={styles.container}>
 		<GenderButtons gender={gender} setIndex={setIndex} setGender={setGender} nextID={nextID}/>
-			
+			<LikeButtons onRelease={onRelease}/>
 			{gender == "girl" ? (
 				<AnimatedCard
 					names={names.girlNames}
