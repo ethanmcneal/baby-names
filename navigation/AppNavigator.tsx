@@ -53,8 +53,8 @@ const MainNavigator = createBottomTabNavigator({
         let iconName :any;
         if (routeName === 'Home') {
           iconName = focused
-            ? 'ios-information-circle'
-            : 'ios-information-circle-outline';
+            ? 'ios-home'
+            : 'ios-home-outline';
         } else if (routeName === 'Your Names') {
           iconName = focused ? 'ios-heart' : 'ios-heart-outline'; 
         }
