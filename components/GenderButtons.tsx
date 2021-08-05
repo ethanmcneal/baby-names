@@ -1,13 +1,15 @@
 import React from 'react';
 import { Ionicons } from "@expo/vector-icons";
 import {
-	StyleSheet,
+	StyleSheet, useColorScheme,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { View } from "./Themed";
 import Colors from '../constants/Colors';
 
 const GenderButtons = (props :any) => {
+
+    const colorScheme = useColorScheme()
 
     const {gender, setIndex, setGender, nextID} = props
 
@@ -17,13 +19,17 @@ const GenderButtons = (props :any) => {
 			: setIndex(nextID.boy);
 		setGender(genderChange);
 	};
+
+    const backgroundColor = colorScheme === 'dark' ? "#3A3A3A" : '#cacaca'
+    const backgroundColorPressed = colorScheme === 'dark' ? "#3f3f3f" : '#bfbfbf'
+
     return (
         <View style={styles.buttonContainer}>
 				<TouchableOpacity
 					style={
 						gender === "boy"
-							? styles.genderButtonPressed
-							: styles.genderButton
+							? [{...styles.genderButtonPressed}, {backgroundColor: backgroundColorPressed, borderColor: Colors.universal.blue}]
+							: [{...styles.genderButton}, {backgroundColor}]
 					}
 					onPress={() => handleGenderButton("boy")}
 				>
@@ -32,8 +38,8 @@ const GenderButtons = (props :any) => {
 				<TouchableOpacity
 					style={
 						gender === "girl"
-							? styles.genderButtonPressed
-							: styles.genderButton
+							? [{...styles.genderButtonPressed}, {backgroundColor:backgroundColorPressed, borderColor: Colors.universal.pink}]
+							: [{...styles.genderButton}, {backgroundColor}]
 					}
 					onPress={() => handleGenderButton("girl")}
 				>
@@ -45,6 +51,7 @@ const GenderButtons = (props :any) => {
 
 export default GenderButtons
 
+
 const styles = StyleSheet.create({
     buttonContainer: {
 		flexDirection: "row",
@@ -54,21 +61,14 @@ const styles = StyleSheet.create({
         borderBottomColor: 'white'
 	},
     genderButton: {
-		padding: 5,
-		borderWidth: .5,
-		borderColor: "#ccc",
-		backgroundColor: "#3A3A3A",
-		shadowOpacity: 0.4,
-		shadowColor: "#222",
-		shadowOffset: { height: 0, width: 0.1 },
+		padding: 7,
 		borderRadius: 8,
 		marginBottom: 10,
 	},
 	genderButtonPressed: {
-		padding: 7,
-		borderWidth: 2,
-		borderColor: "#ccc",
-		backgroundColor: "#333",
+		padding: 6.5,
+		borderWidth: 1,
+		borderColor: "black",
 		borderRadius: 8,
 		marginBottom: 10,
 	},
