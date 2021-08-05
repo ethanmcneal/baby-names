@@ -14,6 +14,7 @@ const LikedNamesScreen = () => {
             renderItem={(nameData) => (
                 <LikedName nameData={nameData} />
             )}/>
+
         </View>
     )
 }

@@ -20,7 +20,12 @@ const navigationOptions = {
         backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
         
     }, 
-    headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text
+    headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,
+    headerTitleStyle: {
+    fontFamily: 'Chalkduster',
+
+    },
+
 }
 const LikedNamesNavigator = createStackNavigator({
     "Liked Names": LikedNamesScreen
