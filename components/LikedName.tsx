@@ -14,7 +14,7 @@ const LikedName = (props: any) => {
 			? Colors.universal.pink
 			: Colors.universal.blue;
 	return (
-        <>
+        <View style={styles.nameContainer}>
 		<View style={styles.nameRow}>
 			<Text style={[{ ...styles.name }, { color }]}>
 				{props.nameData.item.name} {filters.middleName && " "}
@@ -24,21 +24,33 @@ const LikedName = (props: any) => {
                 <Ionicons name={showDetails ? 'chevron-up' : 'chevron-down'} color={color} size={22}/>
             </TouchableOpacity>
 		</View>
-        </>
+        {showDetails && <View style={styles.details}>
+                <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
+                <Ionicons name={'close'} color='red' size={42}/>
+            </TouchableOpacity>
+            </View>}
+        </View>
 	);
 };
 
 export default LikedName;
 
 const styles = StyleSheet.create({
+    nameContainer: {
+        borderBottomWidth: 1,
+		borderBottomColor: "#ccc",
+    },
 	nameRow: {
 		flexDirection: "row",
 		padding: 15,
 		justifyContent: "space-between",
-		borderBottomWidth: 1,
-		borderBottomColor: "#ccc",
+		
 	},
 	name: {
 		fontSize: 22,
 	},
+    details: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
