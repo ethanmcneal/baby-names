@@ -1,8 +1,9 @@
-import Names from "../../assets/data.json";
+import USNames from "../../assets/USNames.json";
+import UKNames from "../../assets/UKNames.json"
 import { NameState } from "../../types";
 import { DISLIKE_NAME, LIKE_NAME } from "../actions/name";
 const initialState = {
-	names: {boyNames: Names.boyNames, girlNames: Names.girlNames},
+	names: {boyNames: USNames.boyNames, girlNames: USNames.girlNames},
 	likedNames: [],
 	dislikedNames: [],
 	lastInteractedId: {boy: 0, girl: 100}
