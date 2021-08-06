@@ -9,7 +9,7 @@ Let us help you pick the name of your next family member!
 2. using official census data, our names are sorted by most popular baby name by country
 3. fluid animations, fast and intuitive.
 
-# MVP to be released to Apple App store on August 15th!
+# MVP to be submitted to Apple App store on August 15th!
 ### Features: 
 - filters: filtering by name, and country,
 - likingNames: Tinder like "rating" system, swipe right to like, left to dislike, fluid and quick animations with no delay after liking,
