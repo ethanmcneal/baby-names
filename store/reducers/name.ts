@@ -2,8 +2,11 @@ import USNames from "../../assets/USNames.json";
 import UKNames from "../../assets/UKNames.json"
 import { NameState } from "../../types";
 import { DISLIKE_NAME, LIKE_NAME } from "../actions/name";
+
+const InternationalNames = {UnitedStates: USNames, EnglandAndWales: UKNames}
 const initialState = {
-	names: {boyNames: USNames.boyNames, girlNames: USNames.girlNames},
+	names: {boyNames: InternationalNames.UnitedStates.boyNames, girlNames: InternationalNames.UnitedStates.girlNames},
+	country: 'UnitedStates',
 	likedNames: [],
 	dislikedNames: [],
 	lastInteractedId: {boy: 0, girl: 100}
