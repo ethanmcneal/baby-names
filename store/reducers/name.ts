@@ -3,7 +3,7 @@ import UKNames from "../../assets/UKNames.json"
 import { NameState } from "../../types";
 import { CHANGE_COUNTRY, DISLIKE_NAME, LIKE_NAME } from "../actions/name";
 
-const InternationalNames = {"UnitedStates": USNames, "EnglandAndWales": UKNames}
+const InternationalNames = {UnitedStates: USNames, EnglandAndWales: UKNames}
 const initialState = {
 	names: {boyNames: InternationalNames.UnitedStates.boyNames, girlNames: InternationalNames.UnitedStates.girlNames},
 	country: 'UnitedStates',
@@ -38,13 +38,26 @@ export default (state: NameState = initialState, action: any) => {
 				lastInteractedId: nextId
 			};
 		case CHANGE_COUNTRY: 
-		let nextCountry :any = InternationalNames[action.country]
+	console.log(action.country)
+
+			let nextNames = InternationalNames.EnglandAndWales;
+				// switch (action.country) {
+				// 	case "UnitedStates":
+				// 		nextNames = InternationalNames.UnitedStates
+				// 		break;
+				// 	case "EnglandAndWhales":
+				// 		nextNames = InternationalNames.EnglandAndWales
+				// 	default:
+				// 		nextNames = InternationalNames.UnitedStates
+				// 		break;
+				// }
+				console.log(nextNames)
 			return {
 				...state,
-				names: {boyNames: nextCountry.boyNames, girlNames: nextCountry.UnitedStates.girlNames},
+				names: {boyNames: nextNames.boyNames, girlNames: nextNames.girlNames},
 				country: action.country,
-				lastInteractedId: {boy: nextCountry.boyNames[0].id - 1, girl: nextCountry.girlNames[0].id - 1}
-			}
+				lastInteractedId: {boy: nextNames.boyNames[0].id - 1, girl: nextNames.girlNames[0].id - 1}
+			};
 		default:
 			return state;
 	}

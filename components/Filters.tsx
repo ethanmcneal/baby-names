@@ -3,6 +3,7 @@ import { Button, StyleSheet, TextInput, useColorScheme } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, View } from "./Themed";
 import * as filterActions from "../store/actions/filters";
+import * as nameActions from "../store/actions/name";
 import Colors from "../constants/Colors";
 
 
@@ -25,6 +26,10 @@ const Filters = (props: any) => {
 		);
 		props.setShowFilter(false);
 	};
+
+	const handleCountryChange = () => {
+		dispatch(nameActions.changeCountry('EnglandAndWhales'))
+	}
 
 	const colorScheme = useColorScheme()
 
@@ -55,7 +60,7 @@ const Filters = (props: any) => {
 			<View style={styles.buttonContainer}>
 				<Button title="Clear" onPress={() => {}} />
 				<Button title="Save" onPress={() => saveFilters()} />
-				<Button title="Change Country" onPress={() => {}}/>
+				<Button title="Change Country" onPress={() => handleCountryChange()}/>
 			</View>
 		</View>
 	);
