@@ -56,7 +56,7 @@ export default (state: NameState = initialState, action: any) => {
 				...state,
 				names: {boyNames: nextNames.boyNames, girlNames: nextNames.girlNames},
 				country: action.country,
-				lastInteractedId: {boy: nextNames.boyNames[0].id - 1, girl: nextNames.girlNames[0].id - 1}
+				lastInteractedId: {boy: nextNames.boyNames[0].id, girl: nextNames.girlNames[0].id}
 			};
 		default:
 			return state;
