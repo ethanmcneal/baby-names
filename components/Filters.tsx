@@ -55,6 +55,7 @@ const Filters = (props: any) => {
 			<View style={styles.buttonContainer}>
 				<Button title="Clear" onPress={() => {}} />
 				<Button title="Save" onPress={() => saveFilters()} />
+				<Button title="Change Country" onPress={() => {}}/>
 			</View>
 		</View>
 	);

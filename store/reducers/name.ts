@@ -1,9 +1,9 @@
 import USNames from "../../assets/USNames.json";
 import UKNames from "../../assets/UKNames.json"
 import { NameState } from "../../types";
-import { DISLIKE_NAME, LIKE_NAME } from "../actions/name";
+import { CHANGE_COUNTRY, DISLIKE_NAME, LIKE_NAME } from "../actions/name";
 
-const InternationalNames = {UnitedStates: USNames, EnglandAndWales: UKNames}
+const InternationalNames = {"UnitedStates": USNames, "EnglandAndWales": UKNames}
 const initialState = {
 	names: {boyNames: InternationalNames.UnitedStates.boyNames, girlNames: InternationalNames.UnitedStates.girlNames},
 	country: 'UnitedStates',
@@ -37,6 +37,14 @@ export default (state: NameState = initialState, action: any) => {
 				dislikedNames: state.likedNames.concat(action.name),
 				lastInteractedId: nextId
 			};
+		case CHANGE_COUNTRY: 
+		let nextCountry :any = InternationalNames[action.country]
+			return {
+				...state,
+				names: {boyNames: nextCountry.boyNames, girlNames: nextCountry.UnitedStates.girlNames},
+				country: action.country,
+				lastInteractedId: {boy: nextCountry.boyNames[0].id - 1, girl: nextCountry.girlNames[0].id - 1}
+			}
 		default:
 			return state;
 	}
