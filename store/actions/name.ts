@@ -5,12 +5,12 @@ export const DISLIKE_NAME = 'DISLIKE_NAME'
 export const CHANGE_COUNTRY = 'CHANGE_COUNTRY'
 
 
-export const likeName = (name :Name) => {
-    return {type: LIKE_NAME, name: name};
+export const likeName = (nameID :number) => {
+    return {type: LIKE_NAME, nameID: nameID};
 }
 
-export const dislikeName = (name :Name) => {
-    return {type: DISLIKE_NAME, name: name};
+export const dislikeName = (nameID :number) => {
+    return {type: DISLIKE_NAME, nameID: nameID};
 }
 
 export const changeCountry = (country :string) => {

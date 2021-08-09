@@ -9,13 +9,14 @@ const initialState = {
 	country: 'UnitedStates',
 	likedNames: [],
 	dislikedNames: [],
-	lastInteractedId: {boy: 0, girl: 100}
+	lastInteractedId: {boy: 1, girl: 101}
 };
 
 export default (state: NameState = initialState, action: any) => {
 	let nextId
 	switch (action.type) {
 		case LIKE_NAME:
+			console.log(action.name)
 			if(action.name.gender === 'girl'){
 				nextId = {boy: state.lastInteractedId.boy, girl: action.name.id}
 			} else {
@@ -51,7 +52,6 @@ export default (state: NameState = initialState, action: any) => {
 				// 		nextNames = InternationalNames.UnitedStates
 				// 		break;
 				// }
-				console.log(nextNames)
 			return {
 				...state,
 				names: {boyNames: nextNames.boyNames, girlNames: nextNames.girlNames},

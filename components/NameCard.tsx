@@ -10,7 +10,7 @@ import LikeButtons from "./LikeButtons";
 const NameCard = (props: any) => {
 	const names = useSelector((state: any) => state.names.names);
 	const nextID = useSelector((state: any) => state.names.lastInteractedId);
-	const [index, setIndex] = useState(0);
+	const [index, setIndex] = useState(1);
 	const [gender, setGender] = useState("boy"); // false === boy || true === girl
 	const dispatch = useDispatch();
 

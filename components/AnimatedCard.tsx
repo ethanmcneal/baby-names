@@ -2,6 +2,7 @@ import React from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import Colors from "../constants/Colors";
+import { Name } from "../types";
 import { Text } from "./Themed";
 
 const { width, height } = Dimensions.get("window");
@@ -9,8 +10,8 @@ const { width, height } = Dimensions.get("window");
 const AnimatedCard = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
 	const { names, index, panResponder, position, gender } = props;
-	const name = names[index];
-	const nextName = names[index + 1];
+	const name = names.filter((name :Name) => name.id === index)[0]
+	const nextName = names.filter((name :Name) => name.id === index + 1)[0]
 
 	let rotate = position.x.interpolate({
 		inputRange: [-width / 2, 0, width / 2],
