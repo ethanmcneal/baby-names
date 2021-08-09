@@ -10,6 +10,8 @@ import CountryDropdown from "./CountryDropdown";
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
+	const [showDropdown, setShowDropdown] = useState(false)
+	const [country, setCountry] = useState('');
 	const [lastName, setLastName] = useState(
         filters ? filters.lastName : ""
     );
@@ -25,11 +27,17 @@ const Filters = (props: any) => {
 				middleName: middleName,
 			}),
 		);
+		if(showDropdown){
+			dispatch(
+				nameActions.changeCountry(country)
+			)
+		}
+		setShowDropdown(false)
 		props.setShowFilter(false);
 	};
 
 	const handleCountryChange = () => {
-		dispatch(nameActions.changeCountry('EnglandAndWhales'))
+		setShowDropdown(!showDropdown)
 	}
 
 	const colorScheme = useColorScheme()
@@ -58,11 +66,11 @@ const Filters = (props: any) => {
 					onChangeText={(text) => setMiddleName(text)}
 				/>
 			</View>
-			<CountryDropdown />
+			{ showDropdown && <CountryDropdown country={country} setCountry={setCountry}/>}
 			<View style={styles.buttonContainer}>
-				<Button title="Clear" onPress={() => {}} />
 				<Button title="Save" onPress={() => saveFilters()} />
-				<Button title="Change Country" onPress={() => handleCountryChange()}/>
+				{showDropdown && <Button title="Cancel" onPress={() => {setShowDropdown(false)}} />}
+				{ !showDropdown && <Button title="Change Country" onPress={() => handleCountryChange()}/>}
 			</View>
 		</View>
 	);

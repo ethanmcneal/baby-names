@@ -2,18 +2,19 @@ import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
 
 const CountryDropdown = (props: any) => {
-	const [selectedLanguage, setSelectedLanguage] = useState('');
+
+    const {country, setCountry} = props;
 
 	return (
 		<Picker
         style={{borderWidth: 1, borderColor: 'black', width: '100%'}}  
-			selectedValue={selectedLanguage}
+			selectedValue={country}
 			onValueChange={(itemValue, itemIndex) =>
-				setSelectedLanguage(itemValue)
+				setCountry(itemValue)
 			}
 		>
-			<Picker.Item  label="Java" value="java" />
-			<Picker.Item label="JavaScript" value="js" />
+			<Picker.Item  label="United State" value="UnitedStates" />
+			<Picker.Item label="England and Wales" value="EnglandAndWales" />
 		</Picker>
 	);
 };
