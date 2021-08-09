@@ -5,6 +5,7 @@ import { Text, View } from "./Themed";
 import * as filterActions from "../store/actions/filters";
 import * as nameActions from "../store/actions/name";
 import Colors from "../constants/Colors";
+import CountryDropdown from "./CountryDropdown";
 
 
 const Filters = (props: any) => {
@@ -57,6 +58,7 @@ const Filters = (props: any) => {
 					onChangeText={(text) => setMiddleName(text)}
 				/>
 			</View>
+			<CountryDropdown />
 			<View style={styles.buttonContainer}>
 				<Button title="Clear" onPress={() => {}} />
 				<Button title="Save" onPress={() => saveFilters()} />
