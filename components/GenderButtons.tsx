@@ -12,8 +12,8 @@ const GenderButtons = (props: any) => {
 
 	const handleGenderButton = (genderChange: string) => {
 		genderChange === "girl"
-			? setIndex(nextID.girl)
-			: setIndex(nextID.boy);
+			? setIndex(nextID.girl + 1)
+			: setIndex(nextID.boy + 1);
 		setGender(genderChange);
 	};
 

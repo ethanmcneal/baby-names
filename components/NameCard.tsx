@@ -20,11 +20,7 @@ const NameCard = (props: any) => {
 		setTimeout(() => {
 			setIndex(prev => prev + 1),
 			dispatch(
-				action(
-					gender === "girl"
-						? names.girlNames[index]
-						: names.boyNames[index],
-				),
+				action(index, gender)
 			)
 		}, 90); //timeout set so the animation will play before the index is incremented, that way the card doesn't
 				// vanish instantly

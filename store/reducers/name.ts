@@ -1,6 +1,6 @@
 import USNames from "../../assets/USNames.json";
 import UKNames from "../../assets/UKNames.json"
-import { NameState } from "../../types";
+import { Name, NameState } from "../../types";
 import { CHANGE_COUNTRY, DISLIKE_NAME, LIKE_NAME } from "../actions/name";
 
 const InternationalNames = {UnitedStates: USNames, EnglandAndWales: UKNames}
@@ -9,33 +9,38 @@ const initialState = {
 	country: 'UnitedStates',
 	likedNames: [],
 	dislikedNames: [],
-	lastInteractedId: {boy: 1, girl: 101}
+	lastInteractedId: {boy: 0, girl: 100}
 };
 
 export default (state: NameState = initialState, action: any) => {
 	let nextId
 	switch (action.type) {
 		case LIKE_NAME:
-			console.log(action.name)
-			if(action.name.gender === 'girl'){
-				nextId = {boy: state.lastInteractedId.boy, girl: action.name.id}
+			let likedName :any
+			if(action.gender === 'girl'){
+				likedName = state.names.girlNames.find((name :Name) => name.id === action.nameID)
+				nextId = {boy: state.lastInteractedId.boy, girl: action.nameID}
 			} else {
-				nextId = {boy: action.name.id, girl: state.lastInteractedId.girl}
+				likedName = state.names.boyNames.find((name :Name) => name.id === action.nameID)
+				nextId = {boy: action.nameID, girl: state.lastInteractedId.girl}
 			}
 			return {
 				...state,
-				likedNames: state.likedNames.concat(action.name),
+				likedNames: state.likedNames.concat(likedName),
 				lastInteractedId: nextId
 			};
 		case DISLIKE_NAME:
-			if(action.name.gender === 'girl'){
-				nextId = {boy: state.lastInteractedId.boy, girl: action.name.id}
+			let dislikedName :any
+			if(action.gender === 'girl'){
+				dislikedName = state.names.girlNames.find((name :Name) => name.id === action.nameID)
+				nextId = {boy: state.lastInteractedId.boy, girl: action.nameID}
 			} else {
-				nextId = {boy: action.name.id, girl: state.lastInteractedId.girl}
+				dislikedName = state.names.boyNames.find((name :Name) => name.id === action.nameID)
+				nextId = {boy: action.nameID, girl: state.lastInteractedId.girl}
 			}
 			return {
 				...state,
-				dislikedNames: state.likedNames.concat(action.name),
+				dislikedNames: state.likedNames.concat(dislikedName),
 				lastInteractedId: nextId
 			};
 		case CHANGE_COUNTRY: 
