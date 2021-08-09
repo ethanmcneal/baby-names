@@ -5,6 +5,8 @@ import Colors from "../constants/Colors";
 import { Name } from "../types";
 import { Text } from "./Themed";
 
+
+
 const { width, height } = Dimensions.get("window");
 
 const AnimatedCard = (props: any) => {
@@ -38,6 +40,11 @@ const AnimatedCard = (props: any) => {
 			...position.getTranslateTransform(),
 		],
 	};
+
+    const reformat = (string :string) => {
+            let rest = string.slice(1).toLowerCase()
+            return string.charAt(0).toUpperCase() + rest
+    }
 	return (
 		<>
 			{nextName && (
@@ -67,7 +74,7 @@ const AnimatedCard = (props: any) => {
 					}
 				>
 					<Text style={styles.name}>
-						{name.name} {filters.middleName}
+						{reformat(name.name)} {filters.middleName}
 						{filters.middleName && " "}
 						{filters.lastName}
 					</Text>
