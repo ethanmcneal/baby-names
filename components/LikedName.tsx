@@ -15,15 +15,15 @@ const LikedName = (props: any) => {
 			: Colors.universal.blue;
 	return (
         <View style={styles.nameContainer}>
+            <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
 		<View style={styles.nameRow}>
 			<Text style={[{ ...styles.name }, { color }]}>
 				{props.nameData.item.name} {filters.middleName && " "}
 				{filters.lastName}
 			</Text>
-            <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
                 <Ionicons name={showDetails ? 'chevron-up' : 'chevron-down'} color={color} size={22}/>
-            </TouchableOpacity>
 		</View>
+            </TouchableOpacity>
         {showDetails && <View style={styles.details}>
                 <TouchableOpacity onPress={() => setShowDetails(!showDetails)}>
                 <Ionicons name={'close'} color='red' size={42}/>

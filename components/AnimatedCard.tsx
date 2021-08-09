@@ -58,7 +58,7 @@ const AnimatedCard = (props: any) => {
 					]}
 				>
 					<Text style={styles.name}>
-						{nextName.name} {filters.middleName}
+						{reformat(nextName.name)} {filters.middleName}
 						{filters.middleName && " "}
 						{filters.lastName}
 					</Text>
