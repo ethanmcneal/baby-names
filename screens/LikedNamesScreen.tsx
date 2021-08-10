@@ -8,7 +8,7 @@ const LikedNamesScreen = () => {
 
     const likedNames = useSelector((state :any) => state.names.likedNames)
     return(
-        <View>
+        <View style={styles.container}>
             <FlatList data={likedNames} 
             keyExtractor={(name) => name.id.toString()}
             renderItem={(nameData) => (
@@ -21,6 +21,9 @@ const LikedNamesScreen = () => {
 
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
     nameRow: {
         flexDirection: 'row',
     }
