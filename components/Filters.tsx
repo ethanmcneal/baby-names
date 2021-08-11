@@ -6,12 +6,15 @@ import * as filterActions from "../store/actions/filters";
 import * as nameActions from "../store/actions/name";
 import Colors from "../constants/Colors";
 import CountryDropdown from "./CountryDropdown";
+import { NameState } from "../types";
 
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
+	const currentCountry = useSelector((state :any) => state.names.country)
+	const prevID = useSelector((state :any) => state.names.previousIDState) //previousIDState
 	const [showDropdown, setShowDropdown] = useState(false)
-	const [country, setCountry] = useState('');
+	const [country, setCountry] = useState(currentCountry);
 	const [lastName, setLastName] = useState(
         filters ? filters.lastName : ""
     );
@@ -19,6 +22,7 @@ const Filters = (props: any) => {
 		filters ? filters.middleName : "",
 	);
 	const dispatch = useDispatch();
+
 
 	const saveFilters = async() => {
 		dispatch(
@@ -29,16 +33,14 @@ const Filters = (props: any) => {
 		);
 		if(showDropdown){
 			try {
-				await dispatch(
-					nameActions.changeCountry(country)
-				)
+				await dispatch(nameActions.changeCountry(country))
+				props.setIndex(prevID[country][props.gender] +1)	
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		setShowDropdown(false)
 		props.setShowFilter(false);
-		props.setIndex(props.nextID[props.gender])	
 	};
 
 	const handleCountryChange = () => {
@@ -71,7 +73,7 @@ const Filters = (props: any) => {
 					onChangeText={(text) => setMiddleName(text)}
 				/>
 			</View>
-			{ showDropdown && <CountryDropdown country={country} setCountry={setCountry}/>}
+			{ showDropdown && <CountryDropdown colorScheme={colorScheme} country={country} setCountry={setCountry}/>}
 			<View style={styles.buttonContainer}>
 				<Button title="Save" onPress={() => saveFilters()} />
 				{showDropdown && <Button title="Cancel" onPress={() => {setShowDropdown(false)}} />}
