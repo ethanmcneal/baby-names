@@ -48,7 +48,7 @@ export default (state: NameState = initialState, action: any) => {
 
 			let nextNames = InternationalNames.EnglandAndWales;
 			let nextIDState
-			let nextPreviousIdState = {...state.previousIDState, [action.country]: state.lastInteractedId} 
+			let nextPreviousIdState = {...state.previousIDState, [state.country]: state.lastInteractedId} 
 				switch (action.country) {
 					case "UnitedStates":
 						nextNames = InternationalNames.UnitedStates
@@ -63,7 +63,7 @@ export default (state: NameState = initialState, action: any) => {
 						nextNames = InternationalNames.UnitedStates
 						break;
 				}
-				console.log(nextIDState, action.country)
+				console.log(nextPreviousIdState)
 			return {
 				...state,
 				names: {boyNames: nextNames.boyNames, girlNames: nextNames.girlNames},
