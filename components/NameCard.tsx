@@ -10,15 +10,15 @@ import LikeButtons from "./LikeButtons";
 const NameCard = (props: any) => {
 	const names = useSelector((state: any) => state.names.names);
 	const nextID = useSelector((state: any) => state.names.lastInteractedId);
-	const [index, setIndex] = useState(1);
 	const [gender, setGender] = useState("boy"); // false === boy || true === girl
+	const [index, setIndex] = useState(nextID[gender] +1);
 	const dispatch = useDispatch();
 
 	const { width, height } = Dimensions.get("window");
 
 	const handleSwipe = (action: any) => {
 		setTimeout(() => {
-			setIndex(prev => prev + 1),
+			setIndex((prev: number) => prev + 1),
 			dispatch(
 				action(index, gender)
 			)
