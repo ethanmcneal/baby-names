@@ -44,7 +44,7 @@ const AnimatedCard = (props: any) => {
     const reformat = (string :string) => {
             let rest = string.slice(1).toLowerCase()
             return string.charAt(0).toUpperCase() + rest
-    }
+    } //england and wales names are in caps for some reason so I am doing this for my sake
 	return (
 		<>
 			{nextName && (

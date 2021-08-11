@@ -7,63 +7,73 @@ import * as nameActions from "../store/actions/name";
 import Colors from "../constants/Colors";
 import CountryDropdown from "./CountryDropdown";
 import { NameState } from "../types";
-
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
-	const currentCountry = useSelector((state :any) => state.names.country)
-	const prevID = useSelector((state :any) => state.names.previousIDState) //previousIDState
-	const [showDropdown, setShowDropdown] = useState(false)
+	const currentCountry = useSelector((state: any) => state.names.country);
+	const prevID = useSelector((state: any) => state.names.previousIDState);
+	const [showDropdown, setShowDropdown] = useState(false);
 	const [country, setCountry] = useState(currentCountry);
-	const [lastName, setLastName] = useState(
-        filters ? filters.lastName : ""
-    );
+	const [lastName, setLastName] = useState(filters ? filters.lastName : "");
 	const [middleName, setMiddleName] = useState(
 		filters ? filters.middleName : "",
 	);
 	const dispatch = useDispatch();
 
-
-	const saveFilters = async() => {
+	const saveFilters = async () => {
 		dispatch(
 			filterActions.createFilter({
 				lastName: lastName,
 				middleName: middleName,
 			}),
 		);
-		if(showDropdown){
+		if (showDropdown) {
 			try {
-				await dispatch(nameActions.changeCountry(country))
-				props.setIndex(prevID[country][props.gender] +1)	
+				await dispatch(nameActions.changeCountry(country));
+				props.setIndex(prevID[country][props.gender] + 1);
 			} catch (error) {
-				console.log(error)
+				console.log(error);
 			}
 		}
-		setShowDropdown(false)
+		setShowDropdown(false);
 		props.setShowFilter(false);
 	};
 
 	const handleCountryChange = () => {
-		setShowDropdown(!showDropdown)
-	}
+		setShowDropdown(!showDropdown);
+	};
 
-	const colorScheme = useColorScheme()
-
+	const colorScheme = useColorScheme();
 
 	const inputText = {
-		color: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,
+		color: colorScheme === "dark" ? Colors.dark.text : Colors.light.text,
 		fontSize: 22,
-	}
+	};
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headerText}>Filters</Text>
 			<View style={styles.inputContainer}>
 				<TextInput
-				style={inputText}
+					style={inputText}
 					value={lastName}
 					placeholder="Last Name(optional)"
 					onChangeText={(text) => setLastName(text)}
 				/>
+				<Text>
+					{lastName && (
+						<TouchableOpacity onPress={() => setLastName('')}>
+							<Text>
+								<Ionicons
+									name="ios-backspace-outline"
+									color={inputText.color}
+									size={25}
+								/>
+							</Text>
+						</TouchableOpacity>
+					)}
+				</Text>
 			</View>
 			<View style={styles.inputContainer}>
 				<TextInput
@@ -72,12 +82,47 @@ const Filters = (props: any) => {
 					placeholder="Middle Name(optional)"
 					onChangeText={(text) => setMiddleName(text)}
 				/>
+				<Text>
+					{middleName && (
+						<TouchableOpacity
+							onPress={() => {
+								setMiddleName("");
+							}}
+						>
+							<Text>
+								<Ionicons
+									name="ios-backspace-outline"
+									color={inputText.color}
+									size={25}
+								/>
+							</Text>
+						</TouchableOpacity>
+					)}
+				</Text>
 			</View>
-			{ showDropdown && <CountryDropdown colorScheme={colorScheme} country={country} setCountry={setCountry}/>}
+			{showDropdown && (
+				<CountryDropdown
+					colorScheme={colorScheme}
+					country={country}
+					setCountry={setCountry}
+				/>
+			)}
 			<View style={styles.buttonContainer}>
 				<Button title="Save" onPress={() => saveFilters()} />
-				{showDropdown && <Button title="Cancel" onPress={() => {setShowDropdown(false)}} />}
-				{ !showDropdown && <Button title="Change Country" onPress={() => handleCountryChange()}/>}
+				{showDropdown && (
+					<Button
+						title="Cancel"
+						onPress={() => {
+							setShowDropdown(false);
+						}}
+					/>
+				)}
+				{!showDropdown && (
+					<Button
+						title="Change Country"
+						onPress={() => handleCountryChange()}
+					/>
+				)}
 			</View>
 		</View>
 	);
@@ -97,6 +142,9 @@ const styles = StyleSheet.create({
 		borderBottomColor: "#ccc",
 		borderBottomWidth: 1,
 		marginVertical: 5,
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
 	},
 	buttonContainer: {
 		flexDirection: "row",
