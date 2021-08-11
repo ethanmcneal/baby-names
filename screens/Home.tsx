@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Appearance, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 import Filters from '../components/Filters';
 import CustomHeaderButton from '../components/HeaderButtonComponent';
 import NameCard from '../components/NameCard';
@@ -15,6 +16,10 @@ export default function Home(props :any) {
   const filterButtonHandler = React.useCallback(() => {
     setShowFilter(!showFilters)
   },[setShowFilter, showFilters])
+	const nextID = useSelector((state: any) => state.names.lastInteractedId);
+  const [index, setIndex] = React.useState(nextID['boy'] +1);
+	const [gender, setGender] = React.useState("boy");
+
 
   React.useEffect(() => {
     props.navigation.setParams({"filtersButton": filterButtonHandler,})
@@ -23,7 +28,7 @@ export default function Home(props :any) {
       <View style={styles.screen}>
     <View style={styles.container}>
       {showFilters && <Filters setShowFilter={setShowFilter}/>}
-      <NameCard showFilters={showFilters}/>
+      <NameCard showFilters={showFilters} nextID={nextID} index={index} setIndex={setIndex} gender={gender} setGender={setGender}/>
     </View>
       </View>
   );

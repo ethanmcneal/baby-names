@@ -8,10 +8,10 @@ import GenderButtons from "./GenderButtons";
 import LikeButtons from "./LikeButtons";
 
 const NameCard = (props: any) => {
+
+	const {showFilters, nextID, index, setIndex, gender, setGender} = props
 	const names = useSelector((state: any) => state.names.names);
-	const nextID = useSelector((state: any) => state.names.lastInteractedId);
-	const [gender, setGender] = useState("boy"); // false === boy || true === girl
-	const [index, setIndex] = useState(nextID[gender] +1);
+	
 	const dispatch = useDispatch();
 
 	const { width, height } = Dimensions.get("window");
@@ -75,7 +75,7 @@ const NameCard = (props: any) => {
 
 	return (
 		<View style={styles.container}>
-			{props.showFilters && <GenderButtons
+			{showFilters && <GenderButtons
 				gender={gender}
 				setIndex={setIndex}
 				setGender={setGender}
