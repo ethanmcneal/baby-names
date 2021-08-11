@@ -32,6 +32,7 @@ export type Name = {
 export type NameState = {
   names: {boyNames: Array<Name>, girlNames: Array<Name>},
   likedNames: Array<Name>,
+  country: string,
   dislikedNames: Array<Name>,
   lastInteractedId: {boy:number,girl:number},
   previousIDState: any, 
