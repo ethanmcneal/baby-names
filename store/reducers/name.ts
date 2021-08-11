@@ -54,14 +54,16 @@ export default (state: NameState = initialState, action: any) => {
 						nextNames = InternationalNames.UnitedStates
 						nextIDState = state.previousIDState.UnitedStates 
 						break;
-					case "EnglandAndWhales":
+					case "EnglandAndWales":
 						nextNames = InternationalNames.EnglandAndWales
 						nextIDState = state.previousIDState.EnglandAndWales
+						console.log(state.previousIDState.EnglandAndWales)
 						break;
 					default:
 						nextNames = InternationalNames.UnitedStates
 						break;
 				}
+				console.log(nextIDState, action.country)
 			return {
 				...state,
 				names: {boyNames: nextNames.boyNames, girlNames: nextNames.girlNames},
