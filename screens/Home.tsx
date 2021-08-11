@@ -27,6 +27,7 @@ export default function Home(props: any) {
 			<View style={styles.container}>
 				{showFilters && (
 					<Filters
+            gender={gender}
 						setIndex={setIndex}
 						nextID={nextID}
 						setShowFilter={setShowFilter}

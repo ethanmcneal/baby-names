@@ -20,7 +20,7 @@ const Filters = (props: any) => {
 	);
 	const dispatch = useDispatch();
 
-	const saveFilters = () => {
+	const saveFilters = async() => {
 		dispatch(
 			filterActions.createFilter({
 				lastName: lastName,
@@ -28,12 +28,17 @@ const Filters = (props: any) => {
 			}),
 		);
 		if(showDropdown){
-			dispatch(
-				nameActions.changeCountry(country)
-			)
+			try {
+				await dispatch(
+					nameActions.changeCountry(country)
+				)
+			} catch (error) {
+				console.log(error)
+			}
 		}
 		setShowDropdown(false)
 		props.setShowFilter(false);
+		props.setIndex(props.nextID[props.gender])	
 	};
 
 	const handleCountryChange = () => {
