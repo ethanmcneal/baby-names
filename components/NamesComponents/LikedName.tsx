@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
-import Colors from "../constants/Colors";
-import { Text, View } from "./Themed";
+import Colors from "../../constants/Colors";
+import { Text, View } from "../Themed";
 
 const reformat = (string :string) => {
 	let rest = string.slice(1).toLowerCase()

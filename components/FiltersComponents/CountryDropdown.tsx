@@ -1,6 +1,6 @@
 import { Picker } from "@react-native-picker/picker";
 import React, { useState } from "react";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 
 const CountryDropdown = (props: any) => {
 

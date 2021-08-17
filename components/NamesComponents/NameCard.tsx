@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Animated, Dimensions, PanResponder, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AnimatedCard from "./AnimatedCard";
-import { View } from "./Themed";
-import * as nameActions from "../store/actions/name";
+import { View } from "../Themed";
+import * as nameActions from "../../store/actions/name";
 import GenderButtons from "./GenderButtons";
 import LikeButtons from "./LikeButtons";
 

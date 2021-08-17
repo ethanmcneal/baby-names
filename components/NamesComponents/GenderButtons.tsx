@@ -2,8 +2,8 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, useColorScheme } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { View } from "./Themed";
-import Colors from "../constants/Colors";
+import { View } from "../Themed";
+import Colors from "../../constants/Colors";
 
 const GenderButtons = (props: any) => {
 	const colorScheme = useColorScheme();

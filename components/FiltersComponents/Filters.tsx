@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, TextInput, useColorScheme } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Text, View } from "./Themed";
-import * as filterActions from "../store/actions/filters";
-import * as nameActions from "../store/actions/name";
-import Colors from "../constants/Colors";
+import { Text, View } from "../Themed";
+import * as filterActions from "../../store/actions/filters";
+import * as nameActions from "../../store/actions/name";
+import Colors from "../../constants/Colors";
 import CountryDropdown from "./CountryDropdown";
-import { NameState } from "../types";
+import { NameState } from "../../types";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import FilterButtons from "./FilterButtons";

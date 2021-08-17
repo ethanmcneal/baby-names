@@ -1,9 +1,9 @@
 import React from "react";
 import { Animated, Dimensions, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
-import Colors from "../constants/Colors";
-import { Name } from "../types";
-import { Text } from "./Themed";
+import Colors from "../../constants/Colors";
+import { Name } from "../../types";
+import { Text } from "../Themed";
 
 
 

@@ -2,8 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, TextInput, useColorScheme, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Text } from "./Themed";
-import Colors from "../constants/Colors";
+import { Text } from "../Themed";
+import Colors from "../../constants/Colors";
 
 const FilterInputs = (props: any) => {
 	const colorScheme = useColorScheme();

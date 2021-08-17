@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { View } from "./Themed"
+import { View } from "../Themed"
 
 const { width, height } = Dimensions.get("window");
 
