@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
-import LikedName from '../components/LikedName'
+import LikedName from '../components/NamesComponents/LikedName'
 import { View } from '../components/Themed'
 
 const LikedNamesScreen = () => {
