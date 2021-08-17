@@ -9,6 +9,7 @@ import CountryDropdown from "./CountryDropdown";
 import { NameState } from "../types";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import FilterButtons from "./FilterButtons";
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
@@ -63,7 +64,7 @@ const Filters = (props: any) => {
 				/>
 				<Text>
 					{lastName && (
-						<TouchableOpacity onPress={() => setLastName('')}>
+						<TouchableOpacity onPress={() => setLastName("")}>
 							<Text>
 								<Ionicons
 									name="ios-backspace-outline"
@@ -107,23 +108,12 @@ const Filters = (props: any) => {
 					setCountry={setCountry}
 				/>
 			)}
-			<View style={styles.buttonContainer}>
-				<Button title="Save" onPress={() => saveFilters()} />
-				{showDropdown && (
-					<Button
-						title="Cancel"
-						onPress={() => {
-							setShowDropdown(false);
-						}}
-					/>
-				)}
-				{!showDropdown && (
-					<Button
-						title="Change Country"
-						onPress={() => handleCountryChange()}
-					/>
-				)}
-			</View>
+			<FilterButtons
+				showDropdown={showDropdown}
+				setShowDropdown={setShowDropdown}
+				handleCountryChange={handleCountryChange}
+				saveFilters={saveFilters}
+			/>
 		</View>
 	);
 };
