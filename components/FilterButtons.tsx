@@ -27,6 +27,9 @@ const FilterButtons = (props :any) => {
 
 
 const styles = StyleSheet.create({
-    buttonContainer: {},
+    buttonContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+	},
 })
 export default FilterButtons

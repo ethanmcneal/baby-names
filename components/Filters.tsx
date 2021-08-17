@@ -136,9 +136,5 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		alignItems: "center",
 	},
-	buttonContainer: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
 });
 export default Filters;
