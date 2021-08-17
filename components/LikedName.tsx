@@ -15,7 +15,7 @@ const LikedName = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
 	const [showDetails, setShowDetails] = useState(false);
 	const color =
-		props.nameData.item.gender === "girl"
+		props.nameData.item.gender === "boy"
 			? Colors.universal.pink
 			: Colors.universal.blue;
 	return (
