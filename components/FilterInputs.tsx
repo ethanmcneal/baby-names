@@ -1,10 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, TextInput, useColorScheme, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useDispatch, useSelector } from "react-redux";
 import { Text } from "./Themed";
-import * as filterActions from '../store/actions/filters'
 import Colors from "../constants/Colors";
 
 const FilterInputs = (props :any) => {
