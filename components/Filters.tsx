@@ -10,6 +10,7 @@ import { NameState } from "../types";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import FilterButtons from "./FilterButtons";
+import FilterInputs from "./FilterInputs";
 
 const Filters = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
@@ -48,59 +49,11 @@ const Filters = (props: any) => {
 
 	const colorScheme = useColorScheme();
 
-	const inputText = {
-		color: colorScheme === "dark" ? Colors.dark.text : Colors.light.text,
-		fontSize: 22,
-	};
+	
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headerText}>Filters</Text>
-			<View style={styles.inputContainer}>
-				<TextInput
-					style={inputText}
-					value={lastName}
-					placeholder="Last Name(optional)"
-					onChangeText={(text) => setLastName(text)}
-				/>
-				<Text>
-					{lastName && (
-						<TouchableOpacity onPress={() => setLastName("")}>
-							<Text>
-								<Ionicons
-									name="ios-backspace-outline"
-									color={inputText.color}
-									size={25}
-								/>
-							</Text>
-						</TouchableOpacity>
-					)}
-				</Text>
-			</View>
-			<View style={styles.inputContainer}>
-				<TextInput
-					style={inputText}
-					value={middleName}
-					placeholder="Middle Name(optional)"
-					onChangeText={(text) => setMiddleName(text)}
-				/>
-				<Text>
-					{middleName && (
-						<TouchableOpacity
-							onPress={() => {
-								setMiddleName("");
-							}}
-						>
-							<Text>
-								<Ionicons
-									name="ios-backspace-outline"
-									color={inputText.color}
-									size={25}
-								/>
-							</Text>
-						</TouchableOpacity>
-					)}
-				</Text>
-			</View>
+			<FilterInputs lastName={lastName} middleName={middleName} setLastName={setLastName} setMiddleName={setMiddleName} />
 			{showDropdown && (
 				<CountryDropdown
 					colorScheme={colorScheme}
