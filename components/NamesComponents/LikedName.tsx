@@ -2,9 +2,10 @@ import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 import { Text, View } from "../Themed";
+import * as nameActions from '../../store/actions/name'
 
 const reformat = (string :string) => {
 	let rest = string.slice(1).toLowerCase()
@@ -14,6 +15,7 @@ const reformat = (string :string) => {
 const LikedName = (props: any) => {
 	const filters = useSelector((state: any) => state.filters.filters);
 	const [showDetails, setShowDetails] = useState(false);
+	const dispatch = useDispatch()
 	const color =
 		props.nameData.item.gender === "girl"
 			? Colors.universal.pink
@@ -37,7 +39,7 @@ const LikedName = (props: any) => {
 			{showDetails && (
 				<View style={styles.details}>
 					<TouchableOpacity
-						onPress={() => setShowDetails(!showDetails)}
+						onPress={() => dispatch(nameActions.unlikeName(props.nameData.item.id))}
 					>
 						<Ionicons name={"close"} color="red" size={42} />
 					</TouchableOpacity>
