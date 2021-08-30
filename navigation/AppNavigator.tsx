@@ -17,7 +17,7 @@ import LikedNamesScreen from "../screens/LikedNamesScreen";
 const colorScheme = Appearance.getColorScheme()
 const navigationOptions = {
     headerStyle: {
-        backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+        backgroundColor: colorScheme === 'dark' ? Colors.dark.backgroundDark : Colors.light.background,
         
     }, 
     headerTintColor: colorScheme === 'dark' ? Colors.dark.text : Colors.light.text,
@@ -66,9 +66,9 @@ const MainNavigator = createBottomTabNavigator({
     tabBarOptions: {
       activeTintColor: colorScheme == 'dark' ? Colors.dark.tabIconSelected : Colors.light.tabIconSelected,
       inactiveTintColor: colorScheme == 'dark' ? Colors.dark.tabIconDefault : Colors.light.tabIconDefault,
-      activeBackgroundColor: colorScheme == 'dark' ? Colors.dark.background : Colors.light.background,
+      activeBackgroundColor: colorScheme == 'dark' ? Colors.dark.backgroundDark : Colors.light.background,
       style: {
-        backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.background,
+        backgroundColor: colorScheme === 'dark' ? Colors.dark.backgroundDark : Colors.light.background,
     },
     },
     
