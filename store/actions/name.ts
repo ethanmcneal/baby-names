@@ -27,4 +27,12 @@ export const loadPreviousNameState = (
 	dislikedNames: Array<Name>,
 	lastInteractedId: { boy: number; girl: number },
 	previousIDState: any,
-) => {};
+) => {
+	return {
+		type: LOAD_PREVIOUS_NAME_STATE,
+		likedNames,
+		dislikedNames,
+		lastInteractedId,
+		previousIDState,
+	};
+};
