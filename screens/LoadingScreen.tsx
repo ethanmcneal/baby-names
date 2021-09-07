@@ -21,7 +21,7 @@ const LoadingScreen = (props :any) => {
             const dislikedNamesJson = await AsyncStorage.getItem('@disliked_Names')
             const lastInteractedIdJson = await AsyncStorage.getItem('@last_Interacted_Id')
             const previousIDStateJson = await AsyncStorage.getItem('@last_Interacted_Id')
-            if(lastInteractedIdJson || true){ // last interacted ID state will always be true if the user liked or disliked a name
+            if(lastInteractedIdJson){ // last interacted ID state will always be true if the user liked or disliked a name
                await dispatch(nameActions.loadPreviousNameState({
                     likedNames: likedNamesJson ? JSON.parse(likedNamesJson) : [],
                     dislikedNames: dislikedNamesJson ? JSON.parse(dislikedNamesJson) : [],

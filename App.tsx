@@ -27,7 +27,7 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [loaded, setLoaded] = useState(false)
 
-  if (!loaded) {
+  if (!loaded || !isLoadingComplete) {
     return (
       <Provider store={store}>
     <LoadingScreen setLoaded={setLoaded}/>
