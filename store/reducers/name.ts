@@ -1,7 +1,7 @@
 import USNames from "../../assets/USNames.json";
 import UKNames from "../../assets/UKNames.json"
 import { Name, NameState } from "../../types";
-import { CHANGE_COUNTRY, DISLIKE_NAME, LIKE_NAME, UNLIKE_NAME } from "../actions/name";
+import { CHANGE_COUNTRY, DISLIKE_NAME, LIKE_NAME, LOAD_PREVIOUS_NAME_STATE, UNLIKE_NAME } from "../actions/name";
 
 const InternationalNames = {UnitedStates: USNames, EnglandAndWales: UKNames}
 const initialState = {
@@ -74,6 +74,14 @@ export default (state: NameState = initialState, action: any) => {
 				lastInteractedId: nextIDState,
 				previousIDState: nextPreviousIdState
 			};
+			case LOAD_PREVIOUS_NAME_STATE: 
+			return {
+				...state,
+				likedNames: action.likedNames,
+				dislikedNames: action.dislikedNames,
+				lastInteractedId: action.lastInteractedId,
+				previousIDState: action.previousIDState,
+			}
 		default:
 			return state;
 	}
