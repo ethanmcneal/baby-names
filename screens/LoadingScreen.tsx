@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
+import CenterView from '../components/myComponents/CenterView';
 import { Text, View } from "../components/Themed";
 import * as nameActions from '../store/actions/name'
 
@@ -20,11 +21,11 @@ const LoadingScreen = (props :any) => {
             const dislikedNamesJson = await AsyncStorage.getItem('@disliked_Names')
             const lastInteractedIdJson = await AsyncStorage.getItem('@last_Interacted_Id')
             const previousIDStateJson = await AsyncStorage.getItem('@last_Interacted_Id')
-            if(lastInteractedIdJson){ // last interacted ID state will always be true if the user liked or disliked a name
+            if(lastInteractedIdJson || true){ // last interacted ID state will always be true if the user liked or disliked a name
                await dispatch(nameActions.loadPreviousNameState({
                     likedNames: likedNamesJson ? JSON.parse(likedNamesJson) : [],
                     dislikedNames: dislikedNamesJson ? JSON.parse(dislikedNamesJson) : [],
-                    lastInteractedId: lastInteractedIdJson ? JSON.parse(lastInteractedIdJson) : {boy:0, girl:100},
+                    lastInteractedId: lastInteractedIdJson ? JSON.parse(lastInteractedIdJson) : {boy:20, girl:100},
                     previousIDState: previousIDStateJson ? JSON.parse(previousIDStateJson) : {UnitedStates: {boy: 0, girl: 100}, EnglandAndWales: {boy: 200, girl: 300}}
                 }))
                 setIsDataLoaded(true)
@@ -32,24 +33,20 @@ const LoadingScreen = (props :any) => {
                 setIsDataLoaded(true)
             }
           } catch(e) {
-            setErrors(e)
+            return JSON.stringify(e)
           } finally {
-              if(isDataLoaded){
                 setLoaded(true)
-            } else {
-                return JSON.stringify(errors)
-            }
           }
     }
 
   
 
     return (
-        <View>
+        <CenterView>
             <Text>
                 Loading...
             </Text>
-        </View>
+        </CenterView>
     )
 }
 export default LoadingScreen
