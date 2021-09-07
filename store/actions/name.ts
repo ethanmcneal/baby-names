@@ -1,4 +1,4 @@
-import { Name } from "../../types";
+import { Name, StoredNameState } from "../../types";
 
 export const LIKE_NAME = "LIKE_NAME";
 export const DISLIKE_NAME = "DISLIKE_NAME";
@@ -22,17 +22,12 @@ export const changeCountry = (country: string) => {
 	return { type: CHANGE_COUNTRY, country: country };
 };
 
-export const loadPreviousNameState = (
-	likedNames: Array<Name>,
-	dislikedNames: Array<Name>,
-	lastInteractedId: { boy: number; girl: number },
-	previousIDState: any,
-) => {
+export const loadPreviousNameState = (previousNameState: StoredNameState) => {
 	return {
 		type: LOAD_PREVIOUS_NAME_STATE,
-		likedNames,
-		dislikedNames,
-		lastInteractedId,
-		previousIDState,
+		likedNames: previousNameState.likedNames,
+		dislikedNames: previousNameState.dislikedNames,
+		lastInteractedId: previousNameState.lastInteractedId,
+		previousIDState: previousNameState.previousIDState,
 	};
 };

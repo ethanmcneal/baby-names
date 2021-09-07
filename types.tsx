@@ -38,6 +38,13 @@ export type NameState = {
   previousIDState: any, 
 }
 
+export type StoredNameState = {
+  likedNames: Array<Name>,
+  dislikedNames: Array<Name>,
+  lastInteractedId: {boy:number,girl:number},
+  previousIDState: any,
+}
+
 export type Filters = {
 lastName: String,
 middleName: String,

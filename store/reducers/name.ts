@@ -75,6 +75,10 @@ export default (state: NameState = initialState, action: any) => {
 				previousIDState: nextPreviousIdState
 			};
 			case LOAD_PREVIOUS_NAME_STATE: 
+			console.log(action.likedNames,
+				action.dislikedNames,
+				action.lastInteractedId,
+				action.previousIDState)
 			return {
 				...state,
 				likedNames: action.likedNames,

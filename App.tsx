@@ -12,6 +12,7 @@ import { enableScreens } from 'react-native-screens';
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import LoadingScreen from './screens/LoadingScreen';
 
 
 const DefaultRootState = combineReducers({
@@ -24,10 +25,14 @@ export default function App() {
   enableScreens()
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
-  const [loading, setLoading] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
-  if (!isLoadingComplete) {
-    return null;
+  if (!loaded) {
+    return (
+      <Provider store={store}>
+    <LoadingScreen setLoaded={setLoaded}/>
+    </Provider>
+    )
   } else {
     return (
       <Provider store={store}>
