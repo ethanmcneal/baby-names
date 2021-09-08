@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import CenterView from '../components/myComponents/CenterView';
 import { Text, View } from "../components/Themed";
 import * as nameActions from '../store/actions/name'
+import { DISLIKED_NAMES_KEY, LAST_INTERACTED_ID_KEY, LIKED_NAMES_KEY, PREVIOUS_ID_STATE_KEY } from '../constants/StorageKeys'
 
 const LoadingScreen = (props :any) => {
     const {setLoaded} = props
@@ -17,10 +18,10 @@ const LoadingScreen = (props :any) => {
 
     const getAsyncStorageData = async() => {
         try {
-            const likedNamesJson = await AsyncStorage.getItem('@liked_Names')
-            const dislikedNamesJson = await AsyncStorage.getItem('@disliked_Names')
-            const lastInteractedIdJson = await AsyncStorage.getItem('@last_Interacted_Id')
-            const previousIDStateJson = await AsyncStorage.getItem('@last_Interacted_Id')
+            const likedNamesJson = await AsyncStorage.getItem(LIKED_NAMES_KEY)
+            const dislikedNamesJson = await AsyncStorage.getItem(DISLIKED_NAMES_KEY)
+            const lastInteractedIdJson = await AsyncStorage.getItem(LAST_INTERACTED_ID_KEY)
+            const previousIDStateJson = await AsyncStorage.getItem(PREVIOUS_ID_STATE_KEY)
             if(lastInteractedIdJson){ // last interacted ID state will always be true if the user liked or disliked a name
                await dispatch(nameActions.loadPreviousNameState({
                     likedNames: likedNamesJson ? JSON.parse(likedNamesJson) : [],
