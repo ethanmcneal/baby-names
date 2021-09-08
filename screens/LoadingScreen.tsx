@@ -14,7 +14,6 @@ import {
 const LoadingScreen = (props: any) => {
 	const { setLoaded } = props;
 	const [isDataLoaded, setIsDataLoaded] = useState(false);
-	const [errors, setErrors] = useState("");
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -32,7 +31,8 @@ const LoadingScreen = (props: any) => {
 			);
 			const previousIDStateJson = await AsyncStorage.getItem(
 				PREVIOUS_ID_STATE_KEY,
-			);
+			); //async storage as a 'multiget' function, but since some of these may be null
+              // I like this way better, and the dispatch is more readable as to what value is being passed
 			if (lastInteractedIdJson) {
 				// last interacted ID state will always be true if the user liked or disliked a name
 				await dispatch(
@@ -60,10 +60,13 @@ const LoadingScreen = (props: any) => {
 			}
 		} catch (e) {
 			return JSON.stringify(e);
-		} finally {
-			setLoaded(true);
 		}
+        
 	};
+
+    if(isDataLoaded){
+        setLoaded(true)
+    }
 
 	return (
 		<CenterView>

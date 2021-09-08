@@ -27,17 +27,19 @@ export default function App() {
   const colorScheme = useColorScheme();
   const [loaded, setLoaded] = useState(false)
 
-  if (!loaded || !isLoadingComplete) {
-    return (
-      <Provider store={store}>
-    <LoadingScreen setLoaded={setLoaded}/>
-    </Provider>
-    )
-  } else {
+  if (loaded && isLoadingComplete) {
     return (
       <Provider store={store}>
         <AppNavigator />
       </Provider>
+    )
+  } else {
+    return (
+    <Provider store={store}>
+      <LoadingScreen setLoaded={setLoaded}/>
+    </Provider>
     );
   }
 }
+
+
