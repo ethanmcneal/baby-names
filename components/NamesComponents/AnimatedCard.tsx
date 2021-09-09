@@ -85,7 +85,7 @@ const AnimatedCard = (props: any) => {
 };
 
 const card: any = {
-	height: 300,
+	height: height / 2.5,
 	alignItems: "center",
 	justifyContent: "center",
 	width: "100%",
