@@ -28,16 +28,6 @@ const NameCard = (props: any) => {
 		//that way the card doesn't vanish instantly
 		//I want the timeout to be quick enough for users to spam the like button
 		//but slow enough so they can't get duplicates in likedNames
-		try {
-			let res;
-			if (action === nameActions.likeName) {
-				res = await AsyncStorage.getItem(LIKED_NAMES_KEY);
-			} else {
-				res = await AsyncStorage.getItem(DISLIKED_NAMES_KEY);
-			}
-		} catch (e) {
-			console.log(e);
-		}
 	};
 
 	let position: any = new Animated.ValueXY();
